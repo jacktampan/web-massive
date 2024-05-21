@@ -8,7 +8,7 @@ const product = {
     {
       id: 1,
       name: 'Kost Cempaka',
-      src: 'https://tailwindui.com/img/ecommerce-images/product-page-03-product-01.jpg',
+      src: 'https://placehold.co/900x700',
       alt: 'Kost Cempaka',
     },
   ],

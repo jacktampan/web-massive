@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import Logoimg from '../assets/logo.png';
 const NavBar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -19,7 +19,7 @@ const NavBar = () => {
                 <div className="flex justify-around">
                     <div className="flex items-center py-5 px-2">
                         <a href="#">
-                            <img src="https://placehold.co/100x100" alt="Logo"/>
+                            <img src={Logoimg} alt="Logo" className="h-36"/>
                         </a>
                     </div>
                     <div className="hidden md:flex items-center space-x-1">
