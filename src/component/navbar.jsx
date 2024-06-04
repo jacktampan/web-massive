@@ -63,8 +63,8 @@ const NavBar = () => {
 
   const links = [
     { name: "Home", href: "/" },
-    { name: "Services", href: "/list" },
-    { name: "Contact", href: "#" },
+    { name: "List", href: "/list" },
+    { name: "About", href: "/about" },
     { name: "Masuk/Daftar", href: "#", isButton: true, onClick: toggleDialog },
   ];
 

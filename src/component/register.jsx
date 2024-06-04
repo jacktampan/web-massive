@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 
 function RegisterForm({ onRegister }) {
   const [formData, setFormData] = useState({
@@ -8,6 +9,8 @@ function RegisterForm({ onRegister }) {
     registered: false,
   });
 
+  const [error, setError] = useState(null);
+
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setFormData({
@@ -16,20 +19,27 @@ function RegisterForm({ onRegister }) {
     });
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    // Perform validation or send data to the server here
-    console.log("Form submitted:", formData);
-    // Reset form after submit
-    setFormData({
-      username: "",
-      email: "",
-      password: "",
-      registered: true,
-    });
-    // Call onRegister function if provided
-    if (onRegister) {
-      onRegister();
+    try {
+      const response = await axios.post("http://localhost:5000/api/register", {
+        username: formData.username,
+        email: formData.email,
+        password: formData.password,
+      });
+      console.log("Form submitted:", response.data);
+      setFormData({
+        username: "",
+        email: "",
+        password: "",
+        registered: true,
+      });
+      if (onRegister) {
+        onRegister();
+      }
+    } catch (error) {
+      console.error("Registration error:", error);
+      setError("Registration failed. Please try again.");
     }
   };
 
@@ -47,6 +57,7 @@ function RegisterForm({ onRegister }) {
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-3xl mb-6">
         <h2 className="text-2xl font-bold mb-6 text-center">Register</h2>
+        {error && <div className="mb-4 text-center text-red-500">{error}</div>}
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label

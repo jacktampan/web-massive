@@ -5,6 +5,7 @@ import List from "./pages/List";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Page from "./pages/Page";
+import About from "./pages/About";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/page" element={<Page />} />
+        <Route path="/about" element={<About />} />
       </Routes>
     </BrowserRouter>
   );

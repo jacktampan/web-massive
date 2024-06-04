@@ -1,9 +1,20 @@
-import React from 'react';
+import React from "react";
 
+// Import images
+import bcaIcon from "../assets/bca.png";
+import bniIcon from "../assets/bni.png";
+import mandiriIcon from "../assets/mandiri.png";
+import heroImage from "../assets/hero-image.png";
+import facebookIcon from "../assets/facebook-logo.png";
+import twitterIcon from "../assets/twitter-icon.png";
+import instagramIcon from "../assets/instagram-icon.png";
+import linkedinIcon from "../assets/likedin-icon.png";
+import youtubeIcon from "../assets/youtube-icon.png";
+import logo from "../assets/logo.png";
 // Main component
 const FooterComponent = () => {
   return (
-    <div className="bg-zinc-800 text-white p-4">
+    <div className="bg-gray-600 text-white mt-8 p-4">
       <div className="max-w-7xl mx-auto flex flex-col lg:flex-row justify-between items-start space-y-4 lg:space-x-8 lg:space-y-0">
         <ContactAndPayment />
         <HeroImage />
@@ -19,16 +30,15 @@ const ContactAndPayment = () => {
   return (
     <div className="flex items-center flex-col lg:flex-row space-y-4 lg:space-y-0 lg:space-x-8">
       <div>
-        <img src="https://placehold.co/100x50" alt="Logo" className="mb-2" />
+        <img src={logo} alt="Logo" className="w-20 h-auto mb-2" />
         <p>Dapatkan info kost murah hanya di KostCozy</p>
         <p>Hubungi 0884-3877-3836</p>
         <div className="mt-4">
           <p className="font-bold mb-1">Payment Methods</p>
           <div className="flex space-x-2">
-            <img src="https://placehold.co/40x25" alt="BCA" />
-            <img src="https://placehold.co/40x25" alt="Bukalapak" />
-            <img src="https://placehold.co/40x25" alt="BNI" />
-            <img src="https://placehold.co/40x25" alt="Mandiri" />
+            <img src={bcaIcon} alt="BCA" className="w-10 h-10" />
+            <img src={bniIcon} alt="BNI" className="w-10 h-10" />
+            <img src={mandiriIcon} alt="Mandiri" className="w-10 h-10" />
           </div>
         </div>
       </div>
@@ -40,7 +50,7 @@ const ContactAndPayment = () => {
 const HeroImage = () => {
   return (
     <div>
-      <img src="https://placehold.co/300x100" alt="Hero Image" className="rounded-lg shadow-lg" />
+      <img src={heroImage} alt="Hero Image" className="w-auto	" />
     </div>
   );
 };
@@ -48,21 +58,21 @@ const HeroImage = () => {
 // Sub-component for Follow Us Section
 const FollowUs = () => {
   const socialLinks = [
-    { name: 'Facebook', icon: 'https://placehold.co/24x24' },
-    { name: 'Twitter', icon: 'https://placehold.co/24x24' },
-    { name: 'Instagram', icon: 'https://placehold.co/24x24' },
-    { name: 'LinkedIn', icon: 'https://placehold.co/24x24' },
-    { name: 'YouTube', icon: 'https://placehold.co/24x24' },
+    { name: "Facebook", icon: facebookIcon },
+    { name: "Twitter", icon: twitterIcon },
+    { name: "Instagram", icon: instagramIcon },
+    { name: "LinkedIn", icon: linkedinIcon },
+    { name: "YouTube", icon: youtubeIcon },
   ];
 
   return (
     <div>
       <p className="font-bold mb-1">Follow us</p>
-      <ul>
+      <ul className="space-y-2">
         {socialLinks.map((link, index) => (
           <li key={index}>
             <a href="#" className="flex items-center space-x-2">
-              <img src={link.icon} alt={link.name} className="mr-2" />
+              <img src={link.icon} alt={link.name} className="w-6 h-6 mr-2" />
               <span>{link.name}</span>
             </a>
           </li>
