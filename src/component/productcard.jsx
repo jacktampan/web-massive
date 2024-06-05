@@ -30,13 +30,13 @@ const ProductCard = ({ product }) => {
       </div>
       <div className="flex justify-between items-center p-4 gap-4">
         <span className="text-zinc-500 dark:text-zinc-400">
-          Harga per bulan: Rp {product.hargaPerBulan}
+          Harga per bulan:
         </span>
         <button
           onClick={handleRentNow}
-          className="bg-blue-500 text-white px-4 py-2 rounded-lg"
+          className="bg-orange-500 text-black text-bold px-4 py-2 rounded-lg"
         >
-          Rent Now
+          Rp {product.hargaPerBulan}
         </button>
       </div>
     </div>
