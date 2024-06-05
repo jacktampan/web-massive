@@ -25,9 +25,7 @@ export default function List() {
   return (
     <div className="bg-white">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <h2 className="my-4 text-xl">
-          Cari Kost Dekat {productsKost[0]?.name}
-        </h2>
+        <h2 className="my-4 text-xl">Daftar Kost yang Anda Cari</h2>
         <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 lg:gap-x-8">
           {productsKost.map((product) => (
             <Link key={product.id} to={product.href} className="group text-sm">
