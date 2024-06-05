@@ -6,7 +6,8 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Page from "./pages/Page";
 import About from "./pages/About";
-import Checkout from "./pages/Checkout";
+import Checkout from "./pages/Checkout"; // Import Checkout page
+import OrderSummary from "./pages/OrderSummary"; // Import OrderSummary page
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/page/:id" element={<Page />} />
         <Route path="/about" element={<About />} />
         <Route path="/checkout" element={<Checkout />} />
+        <Route path="/order-summary" element={<OrderSummary />} />
       </Routes>
     </BrowserRouter>
   );

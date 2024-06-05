@@ -117,6 +117,12 @@ function RegisterForm({ onRegister }) {
             Register
           </button>
         </form>
+        <p className="text-center text-gray-600 mt-4">
+          Already have an account?{" "}
+          <a href="/login" className="text-blue-500 hover:underline">
+            Login here
+          </a>
+        </p>
       </div>
     </div>
   );

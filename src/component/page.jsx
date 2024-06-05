@@ -89,13 +89,13 @@ const Page = () => {
             src={product.images[1].src}
             alt="Hero Image"
             onClick={() => handleImageClick(product.images[1].src)}
-            className="cursor-pointer"
+            className="cursor-pointer max-h-36"
           />
           <img
             src={product.images[2].src}
             alt="Hero Image"
             onClick={() => handleImageClick(product.images[2].src)}
-            className="cursor-pointer"
+            className="cursor-pointer max-h-36"
           />
         </div>
       </div>
@@ -121,7 +121,7 @@ const Page = () => {
               Fasilitas Bersama
             </h2>
           </div>
-          <ul className="list-disc list-inside grid grid-cols-2">
+          <ul className="list-disc list-inside">
             {product.fasilitasBersama.map((fasilitas, index) => (
               <li key={index}>{fasilitas}</li>
             ))}
@@ -148,7 +148,7 @@ const Page = () => {
           </ul>
         </div>
 
-        <div className="col-start-3">
+        {/* <div className="col-start-3">
           <div className="mt-10">
             <img src={product.images[0].src} alt="" />
           </div>
@@ -159,7 +159,7 @@ const Page = () => {
               <li>0.35 km dari Alfamart</li>
             </ul>
           </div>
-        </div>
+        </div> */}
       </div>
       {isModalOpen && (
         <Modal

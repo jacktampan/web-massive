@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { RadioGroup } from "@headlessui/react";
 import { CheckCircleIcon, TrashIcon } from "@heroicons/react/20/solid";
@@ -10,6 +10,7 @@ function classNames(...classes) {
 
 export default function Checkout() {
   const location = useLocation();
+  const navigate = useNavigate();
   const product = location.state?.product;
 
   const [selectedMethod, setSelectedMethod] = useState(null);
@@ -55,12 +56,20 @@ export default function Checkout() {
     }
   }, [product]);
 
+  const handleConfirmOrder = (e) => {
+    e.preventDefault();
+    navigate("/order-summary", { state: { product } });
+  };
+
   return (
     <div className="bg-gray-50">
       <div className="mx-auto max-w-2xl px-4 pb-24 pt-16 sm:px-6 lg:max-w-7xl lg:px-8">
         <h2 className="sr-only">Checkout</h2>
 
-        <form className="lg:grid lg:grid-cols-2 lg:gap-x-12 xl:gap-x-16">
+        <form
+          className="lg:grid lg:grid-cols-2 lg:gap-x-12 xl:gap-x-16"
+          onSubmit={handleConfirmOrder}
+        >
           <div>
             <div>
               <h2 className="text-lg font-medium text-gray-900">
@@ -225,26 +234,6 @@ export default function Checkout() {
                             .find((option) => option.id === selectedMethod)
                             ?.price.toLocaleString()}
                         </p>
-
-                        <div className="ml-4">
-                          <label htmlFor="quantity" className="sr-only">
-                            Quantity
-                          </label>
-                          <select
-                            id="quantity"
-                            name="quantity"
-                            className="rounded-md border border-gray-300 text-left text-base font-medium text-gray-700 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm"
-                          >
-                            <option value={1}>1</option>
-                            <option value={2}>2</option>
-                            <option value={3}>3</option>
-                            <option value={4}>4</option>
-                            <option value={5}>5</option>
-                            <option value={6}>6</option>
-                            <option value={7}>7</option>
-                            <option value={8}>8</option>
-                          </select>
-                        </div>
                       </div>
                     </div>
                   </li>
