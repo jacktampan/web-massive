@@ -1,85 +1,49 @@
-import React from "react";
-
-const productsKost = [
-  {
-    id: 1,
-    name: "Cozy Kost Cempaka",
-    href: "#",
-    price: "Rp 500000",
-    availability: "Jln. Mayjen Bambang Sugeng No. 1 Sidojoyo Wonosobo",
-    imageSrc: "https://placehold.co/300x300",
-    imageAlt: "Cozy Kost Cempaka",
-  },
-  {
-    id: 2,
-    name: "Cozy Kost Urban Residence",
-    href: "#",
-    price: "Rp 700000",
-    availability: "Jln. Mayjen Bambang Sugeng No. 2 Sidojoyo Wonosobo",
-    imageSrc: "https://placehold.co/300x300",
-    imageAlt: "Cozy Kost Urban Residence",
-  },
-  {
-    id: 3,
-    name: "Cozy Kost Azzahra",
-    href: "#",
-    price: "Rp 900000",
-    availability: "Jln. Mayjen Bambang Sugeng No. 3 Sidojoyo Wonosobo",
-    imageSrc: "https://placehold.co/300x300",
-    imageAlt: "Cozy Kost Azzahra",
-  },
-  {
-    id: 4,
-    name: "Permata Indah I",
-    href: "#",
-    price: "Rp 500000",
-    availability: "Jln. Mayjen Bambang Sugeng No. 4 Sidojoyo Wonosobo",
-    imageSrc: "https://placehold.co/300x300",
-    imageAlt: "Permata Indah I",
-  },
-  {
-    id: 5,
-    name: "Raflesia Anugrah",
-    href: "#",
-    price: "Rp 700000",
-    availability: "Jln. Mayjen Bambang Sugeng No. 5 Sidojoyo Wonosobo",
-    imageSrc: "https://placehold.co/300x300",
-    imageAlt: "Raflesia Anugrah",
-  },
-  {
-    id: 6,
-    name: "Kost Temenanggung 1",
-    href: "#",
-    price: "Rp 900000",
-    availability: "Jln. Mayjen Bambang Sugeng No. 6 Sidojoyo Wonosobo",
-    imageSrc: "https://placehold.co/300x300",
-    imageAlt: "Kost Temenanggung 1",
-  },
-];
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function List() {
+  const [productsKost, setProductsKost] = useState([]);
+
+  useEffect(() => {
+    fetch("http://38.45.67.174:5000/api/products")
+      .then((response) => response.json())
+      .then((data) => {
+        const formattedData = data.map((product) => ({
+          id: product.id,
+          name: product.namaKost,
+          href: `/page/${product.id}`, // Update href to navigate to the Page component with the product ID
+          price: `Rp ${product.hargaPerBulan}`,
+          availability: `${product.alamat}, ${product.kota}, ${product.provinsi}`,
+          imageSrc: `http://38.45.67.174:5000/uploads/${product.fotoKost}`,
+          imageAlt: product.namaKost,
+        }));
+        setProductsKost(formattedData);
+      })
+      .catch((error) => console.error("Error fetching data:", error));
+  }, []);
+
   return (
     <div className="bg-white">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <h2 className="my-4 text-xl">Cari Kost Dekat {productsKost[0].name}</h2>
+        <h2 className="my-4 text-xl">
+          Cari Kost Dekat {productsKost[0]?.name}
+        </h2>
         <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 lg:gap-x-8">
-          {productsKost.map((producto) => (
-            <a key={producto.id} href={producto.href} className="group text-sm">
+          {productsKost.map((product) => (
+            <Link key={product.id} to={product.href} className="group text-sm">
               <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-100 group-hover:opacity-75">
                 <img
-                  src={producto.imageSrc}
-                  alt={producto.imageAlt}
-                  className="h-full w-full object-cover object-center"
+                  src={product.imageSrc}
+                  alt={product.imageAlt}
+                  className="w-96 h-80 object-cover object-center"
                 />
               </div>
-              <h3 className="mt-4 font-medium text-gray-900">
-                {producto.name}
-              </h3>
+              <h3 className="mt-4 font-medium text-gray-900">{product.name}</h3>
               <p className="mt-1 text-sm text-gray-500">
-                {producto.availability}
+                {product.availability}
               </p>
-              <p className="mt-2 font-medium text-gray-900">{producto.price}</p>
-            </a>
+              <p className="mt-2 font-medium text-gray-900">{product.price}</p>
+            </Link>
           ))}
         </div>
       </div>
