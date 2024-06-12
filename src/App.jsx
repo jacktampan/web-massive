@@ -6,8 +6,9 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Page from "./pages/Page";
 import About from "./pages/About";
-import Checkout from "./pages/Checkout"; // Import Checkout page
-import OrderSummary from "./pages/OrderSummary"; // Import OrderSummary page
+import Checkout from "./pages/Checkout";
+import OrderSummary from "./pages/OrderSummary";
+import Profile from "./pages/Profile";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/order-summary" element={<OrderSummary />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
     </BrowserRouter>
   );

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-const Register = () => {
+const AdminRegister = () => {
   const [formData, setFormData] = useState({
     username: "",
     email: "",
@@ -21,19 +21,19 @@ const Register = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://38.45.67.174:3000/api/register/user",
+        "http://38.45.67.174:3000/api/auth/register/admin",
         formData
       );
-      alert("User registered successfully");
+      alert("Admin registered successfully");
     } catch (error) {
-      console.error("There was an error registering the user!", error);
-      alert("Failed to register user");
+      console.error("There was an error registering the admin!", error);
+      alert("Failed to register admin");
     }
   };
 
   return (
     <div className="register-form">
-      <h2>Register</h2>
+      <h2>Register Admin</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label>Username</label>
@@ -91,4 +91,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default AdminRegister;
