@@ -12,7 +12,7 @@ function AdminLogin() {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://38.45.67.174:3000/api/login/admin",
+        "http://38.45.67.174:3000/api/auth/login/admin",
         {
           username,
           password,
