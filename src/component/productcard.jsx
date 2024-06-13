@@ -12,7 +12,7 @@ const ProductCard = ({ product }) => {
   return (
     <div className="bg-white dark:bg-zinc-800 shadow-lg rounded-lg overflow-hidden mx-auto max-w-96">
       <img
-        src={`http://38.45.67.174:5000/uploads/${product.fotoKost}`}
+        src={`http://38.45.67.174:3000/uploads/${product.fotoKost}`}
         alt={`Image of ${product.namaKost}`}
         className="w-full h-48 object-cover"
         onError={(e) =>

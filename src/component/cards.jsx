@@ -16,7 +16,7 @@ const Cards = () => {
     const fetchProducts = async () => {
       try {
         const response = await axios.get(
-          "http://38.45.67.174:5000/api/products"
+          "http://38.45.67.174:3000/api/products"
         );
         const data = response.data.map((product) => ({
           id: product.id,

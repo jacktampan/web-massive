@@ -14,7 +14,7 @@ const Page = () => {
     const fetchProduct = async () => {
       try {
         const response = await axios.get(
-          `http://38.45.67.174:5000/api/products/${id}`
+          `http://38.45.67.174:3000/api/products/${id}`
         );
         const product = response.data;
         setProduct({
@@ -26,19 +26,19 @@ const Page = () => {
             {
               id: 1,
               name: product.namaKost,
-              src: `http://38.45.67.174:5000/uploads/${product.fotoKost}`,
+              src: `http://38.45.67.174:3000/uploads/${product.fotoKost}`,
               alt: product.namaKost,
             },
             {
               id: 2,
               name: "Luar Kamar",
-              src: `http://38.45.67.174:5000/uploads/${product.fotoLuarKamar}`,
+              src: `http://38.45.67.174:3000/uploads/${product.fotoLuarKamar}`,
               alt: "Luar Kamar",
             },
             {
               id: 3,
               name: "Dalam Kamar",
-              src: `http://38.45.67.174:5000/uploads/${product.fotoDalamKamar}`,
+              src: `http://38.45.67.174:3000/uploads/${product.fotoDalamKamar}`,
               alt: "Dalam Kamar",
             },
           ],

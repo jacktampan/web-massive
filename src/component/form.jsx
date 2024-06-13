@@ -21,7 +21,7 @@ export default function Checkout() {
       const fetchOptions = async () => {
         try {
           const response = await axios.get(
-            `http://38.45.67.174:5000/api/products/${product.id}`
+            `http://38.45.67.174:3000/api/products/${product.id}`
           );
           const data = response.data;
           setOptions([
