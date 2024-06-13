@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom"; // gunakan useNavigate
 import axios from "axios";
 import logo from "../assets/logo.png";
 
@@ -7,9 +8,9 @@ const Register = () => {
     username: "",
     email: "",
     password: "",
-    address: "",
-    phone_number: "",
   });
+
+  const navigate = useNavigate(); // inisialisasi useNavigate
 
   const handleChange = (e) => {
     setFormData({
@@ -22,10 +23,11 @@ const Register = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://38.45.67.174:3000/api/register/user",
+        "http://38.45.67.174:3000/api/auth/register/user",
         formData
       );
       alert("User registered successfully");
+      navigate("/login"); // redirect ke halaman login
     } catch (error) {
       console.error("There was an error registering the user!", error);
       alert("Failed to register user");
@@ -91,36 +93,6 @@ const Register = () => {
               onChange={handleChange}
               className="w-full px-3 py-2 border rounded focus:outline-none focus:border-orange-500"
               placeholder="Password"
-              required
-            />
-          </div>
-          <div className="mb-4">
-            <label className="block text-gray-700 mb-2" htmlFor="address">
-              Address
-            </label>
-            <input
-              type="text"
-              id="address"
-              name="address"
-              value={formData.address}
-              onChange={handleChange}
-              className="w-full px-3 py-2 border rounded focus:outline-none focus:border-orange-500"
-              placeholder="Address"
-              required
-            />
-          </div>
-          <div className="mb-6">
-            <label className="block text-gray-700 mb-2" htmlFor="phone_number">
-              Phone Number
-            </label>
-            <input
-              type="text"
-              id="phone_number"
-              name="phone_number"
-              value={formData.phone_number}
-              onChange={handleChange}
-              className="w-full px-3 py-2 border rounded focus:outline-none focus:border-orange-500"
-              placeholder="Phone Number"
               required
             />
           </div>

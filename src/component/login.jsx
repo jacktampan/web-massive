@@ -12,7 +12,7 @@ function Login() {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://38.45.67.174:3000/api/login/user",
+        "http://38.45.67.174:3000/api/auth/login/user",
         {
           email,
           password,
@@ -21,7 +21,7 @@ function Login() {
       localStorage.setItem("token", response.data.token);
       alert("Login successful");
       // Redirect to dashboard or any other page
-      window.location.href = "/dashboard";
+      window.location.href = "/";
     } catch (error) {
       console.error("There was an error logging in!", error);
       alert("Login failed. Please check your credentials.");
