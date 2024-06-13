@@ -9,6 +9,9 @@ import About from "./pages/About";
 import Checkout from "./pages/Checkout";
 import OrderSummary from "./pages/OrderSummary";
 import Profile from "./pages/Profile";
+import AdminRegister from "./pages/AdminRegister";
+import AdminSettings from "./pages/AdminSettings";
+import AdminLogin from "./pages/LoginAdmin";
 
 function App() {
   return (
@@ -23,6 +26,9 @@ function App() {
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/order-summary" element={<OrderSummary />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/admin/register" element={<AdminRegister />} />
+        <Route path="/admin/settings" element={<AdminSettings />} />
+        <Route path="/admin/login" element={<AdminLogin />} />
       </Routes>
     </BrowserRouter>
   );

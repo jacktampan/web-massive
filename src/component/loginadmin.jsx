@@ -4,24 +4,24 @@ import logo from "../assets/logo.png";
 import googleLogo from "../assets/google-logo.png";
 import facebookLogo from "../assets/facebook-logo.png";
 
-function Login() {
-  const [email, setEmail] = useState("");
+function AdminLogin() {
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://38.45.67.174:3000/api/login/user",
+        "http://38.45.67.174:3000/api/login/admin",
         {
-          email,
+          username,
           password,
         }
       );
       localStorage.setItem("token", response.data.token);
       alert("Login successful");
-      // Redirect to dashboard or any other page
-      window.location.href = "/dashboard";
+      // Redirect to admin dashboard or any other page
+      window.location.href = "/admin/dashboard";
     } catch (error) {
       console.error("There was an error logging in!", error);
       alert("Login failed. Please check your credentials.");
@@ -38,24 +38,24 @@ function Login() {
             className="h-32 w-32 mx-auto mb-4"
           />
           <h2 className="text-2xl font-semibold text-orange-500">
-            Welcome to KostCozy
+            Admin Login
           </h2>
           <p className="text-gray-600">
-            Please enter your email and password to login.
+            Please enter your username and password to login.
           </p>
         </div>
         <form onSubmit={handleLogin}>
           <div className="mb-4">
-            <label className="block text-gray-700 mb-2" htmlFor="email">
-              Masukkan email anda
+            <label className="block text-gray-700 mb-2" htmlFor="username">
+              Masukkan username anda
             </label>
             <input
-              type="email"
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              type="text"
+              id="username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
               className="w-full px-3 py-2 border rounded focus:outline-none focus:border-orange-500"
-              placeholder="Email"
+              placeholder="Username"
               required
             />
           </div>
@@ -107,4 +107,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default AdminLogin;
