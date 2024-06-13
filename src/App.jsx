@@ -12,6 +12,8 @@ import Profile from "./pages/Profile";
 import AdminRegister from "./pages/AdminRegister";
 import AdminSettings from "./pages/AdminSettings";
 import AdminLogin from "./pages/LoginAdmin";
+import Dashboard from "./dashboard/Dashboard";
+import ListProduct from "./dashboard/ListProduct";
 
 function App() {
   return (
@@ -29,6 +31,8 @@ function App() {
         <Route path="/admin/register" element={<AdminRegister />} />
         <Route path="/admin/settings" element={<AdminSettings />} />
         <Route path="/admin/login" element={<AdminLogin />} />
+        <Route path="/dashboard/add" element={<Dashboard />} />
+        <Route path="/dashboard/list" element={<ListProduct />} />
       </Routes>
     </BrowserRouter>
   );
