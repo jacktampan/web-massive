@@ -12,8 +12,10 @@ import Profile from "./pages/Profile";
 import AdminRegister from "./pages/AdminRegister";
 import AdminSettings from "./pages/AdminSettings";
 import AdminLogin from "./pages/LoginAdmin";
+import Confirmation from "./pages/Confirmation";
 import Dashboard from "./dashboard/Dashboard";
 import ListProduct from "./dashboard/ListProduct";
+import HomeDashboard from "./dashboard/Home";
 
 function App() {
   return (
@@ -33,6 +35,8 @@ function App() {
         <Route path="/admin/login" element={<AdminLogin />} />
         <Route path="/dashboard/add" element={<Dashboard />} />
         <Route path="/dashboard/list" element={<ListProduct />} />
+        <Route path="/confirmation" element={<Confirmation />} />
+        <Route path="/dashboard" element={<HomeDashboard />} />
       </Routes>
     </BrowserRouter>
   );

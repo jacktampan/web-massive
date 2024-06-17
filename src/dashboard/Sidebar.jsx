@@ -6,7 +6,7 @@ import {
 import logo from "../assets/logo.png";
 
 const navigation = [
-  { name: "Dashboard", href: "#", icon: HomeIcon, current: true },
+  { name: "Dashboard", href: "/dashboard", icon: HomeIcon, current: true },
   {
     name: "Add",
     href: "/dashboard/add",
@@ -27,7 +27,7 @@ function classNames(...classes) {
 
 export default function Sidebar() {
   return (
-    <div className="flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 bg-white px-6">
+    <div className="flex h-full flex-col gap-y-5 overflow-y-auto border-r border-gray-200 bg-white px-6">
       <div className="flex h-16 shrink-0 items-center">
         <img className="h-8 w-auto" src={logo} alt="Kost Cozy" />
       </div>
