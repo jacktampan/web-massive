@@ -1,6 +1,12 @@
 import React, { useState, Fragment } from "react";
 import Sidebar from "./Sidebar";
-import { Listbox, Transition } from "@headlessui/react";
+import {
+  Listbox,
+  ListboxButton,
+  ListboxOption,
+  ListboxOptions,
+  Transition,
+} from "@headlessui/react";
 
 // ContactCS Component
 const ContactCS = () => {
@@ -42,9 +48,9 @@ const AddKostForm = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-white p-6 rounded-lg shadow-lg mx-auto max-w-md"
+      className="bg-white p-6 rounded-lg mx-auto max-w-md"
     >
-      <h2 className="text-xl font-bold mb-4 text-gray-800">Tambah Data Kost</h2>
+      <h2 className="text-xl font-bold mb-4 text-gray-800">Ubah No Rekening</h2>
       <div className="mb-4">
         <label
           htmlFor="bank"
@@ -54,18 +60,18 @@ const AddKostForm = () => {
         </label>
         <Listbox value={selectedBank} onChange={setSelectedBank}>
           <div className="relative mt-1">
-            <Listbox.Button className="relative w-full cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-opacity-75 sm:text-sm">
+            <ListboxButton className="relative w-full cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-opacity-75 sm:text-sm">
               <span className="block truncate">{selectedBank}</span>
-            </Listbox.Button>
+            </ListboxButton>
             <Transition
               as={Fragment}
               leave="transition ease-in duration-100"
               leaveFrom="opacity-100"
               leaveTo="opacity-0"
             >
-              <Listbox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+              <ListboxOptions className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
                 {banks.map((bank, bankIdx) => (
-                  <Listbox.Option
+                  <ListboxOption
                     key={bankIdx}
                     className={({ active }) =>
                       `relative cursor-default select-none py-2 pl-10 pr-4 ${
@@ -85,9 +91,9 @@ const AddKostForm = () => {
                         </span>
                       </>
                     )}
-                  </Listbox.Option>
+                  </ListboxOption>
                 ))}
-              </Listbox.Options>
+              </ListboxOptions>
             </Transition>
           </div>
         </Listbox>
