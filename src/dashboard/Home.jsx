@@ -48,7 +48,7 @@ const AddKostForm = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-white p-6 rounded-lg mx-auto max-w-md"
+      className="bg-white p-6 rounded-lg shadow-lg mx-auto max-w-md"
     >
       <h2 className="text-xl font-bold mb-4 text-gray-800">Ubah No Rekening</h2>
       <div className="mb-4">
