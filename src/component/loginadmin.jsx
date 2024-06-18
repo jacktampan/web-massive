@@ -12,16 +12,17 @@ function AdminLogin() {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://38.45.67.174:3000/api/auth/login/admin",
+        "http://23.26.138.128:3000/api/auth/login",
         {
           username,
           password,
+          role: "admin", // Menambahkan role admin
         }
       );
       localStorage.setItem("token", response.data.token);
       alert("Login successful");
       // Redirect to admin dashboard or any other page
-      window.location.href = "/admin/dashboard";
+      window.location.href = "/dashboard";
     } catch (error) {
       console.error("There was an error logging in!", error);
       alert("Login failed. Please check your credentials.");

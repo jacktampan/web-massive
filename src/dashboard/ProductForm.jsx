@@ -89,12 +89,14 @@ const ProductForm = () => {
     }
 
     try {
+      const token = localStorage.getItem("token");
       const response = await axios.post(
-        "http://localhost:3000/api/products",
+        "http://23.26.138.128:3000/api/products",
         data,
         {
           headers: {
             "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${token}`,
           },
         }
       );

@@ -20,7 +20,7 @@ const AdminRegister = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://38.45.67.174:3000/api/auth/register/admin",
+        "http://23.26.138.128:3000/api/auth/register/admin",
         formData
       );
       alert("Admin registered successfully");
@@ -98,6 +98,17 @@ const AdminRegister = () => {
           >
             Register
           </button>
+          <div className="text-center p-6">
+            <p className="text-gray-600">
+              Do you have an account with us?{" "}
+              <a
+                href="/admin/login"
+                className="text-orange-500 hover:underline"
+              >
+                Login
+              </a>
+            </p>
+          </div>
         </form>
       </div>
     </div>

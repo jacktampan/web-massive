@@ -23,7 +23,7 @@ const Register = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://38.45.67.174:3000/api/auth/register/user",
+        "http://23.26.138.128:3000/api/auth/register/user",
         formData
       );
       alert("User registered successfully");

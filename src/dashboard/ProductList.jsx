@@ -16,7 +16,9 @@ const ProductList = () => {
   const fetchProducts = async () => {
     setLoading(true);
     try {
-      const response = await axios.get("http://38.45.67.174:3000/api/products");
+      const response = await axios.get(
+        "http://23.26.138.128:3000/api/products"
+      );
       const parsedProducts = response.data.map((product) => ({
         ...product,
         fasilitasKamar: Array.isArray(product.fasilitasKamar)
@@ -44,7 +46,7 @@ const ProductList = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://38.45.67.174:3000/api/products/${id}`);
+      await axios.delete(`http://23.26.138.128:3000/api/products/${id}`);
       fetchProducts();
     } catch (error) {
       console.error("There was an error deleting the product!", error);
@@ -56,7 +58,7 @@ const ProductList = () => {
     setLoading(true);
     try {
       await axios.put(
-        `http://38.45.67.174:3000/api/products/${editingProduct.id}`,
+        `http://23.26.138.128:3000/api/products/${editingProduct.id}`,
         editingProduct
       );
       setEditingProduct(null);
@@ -79,20 +81,11 @@ const ProductList = () => {
       <div className="sm:flex sm:items-center">
         <div className="sm:flex-auto">
           <h1 className="text-base font-semibold leading-6 text-gray-900">
-            List Produk
+            List Kost
           </h1>
           <p className="mt-2 text-sm text-gray-700">
-            A list of all the products in your account including their name and
-            monthly price.
+            Daftar semua Kost di akun Anda termasuk nama dan harga bulanan.
           </p>
-        </div>
-        <div className="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-          <button
-            type="button"
-            className="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-          >
-            Add product
-          </button>
         </div>
       </div>
       <div className="mt-8 flow-root">
