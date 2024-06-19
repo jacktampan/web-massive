@@ -4,8 +4,10 @@ import { useLocation } from "react-router-dom";
 export default function OrderSummary() {
   const location = useLocation();
   const product = location.state?.product;
+  const selectedOption = location.state?.selectedOption;
+  const paymentInfo = location.state?.paymentInfo;
 
-  if (!product) {
+  if (!product || !selectedOption || !paymentInfo) {
     return <div>Loading...</div>;
   }
 
@@ -13,10 +15,10 @@ export default function OrderSummary() {
     {
       id: product.id,
       name: product.name,
-      description: `Harga sewa untuk Kost ${product.name}`,
+      description: `Harga sewa untuk Kost ${product.name} (${selectedOption.title})`,
       href: "#",
       quantity: 1,
-      price: `Rp ${product.hargaPerBulan.toLocaleString()}`,
+      price: `Rp ${selectedOption.price.toLocaleString()}`,
       imageSrc: product.images[0].src,
       imageAlt: product.images[0].alt,
     },
@@ -70,9 +72,9 @@ export default function OrderSummary() {
               <div>
                 <dt className="font-medium text-gray-900">Payment method</dt>
                 <dd className="mt-2 text-gray-700">
-                  <p>Bank Transfer</p>
-                  <p>BNI</p>
-                  <p>No. Rekening: 1234567890</p>
+                  <p>{paymentInfo.method}</p>
+                  <p>{paymentInfo.bank}</p>
+                  <p>No. Rekening: {paymentInfo.accountNumber}</p>
                 </dd>
               </div>
             </dl>
@@ -83,8 +85,7 @@ export default function OrderSummary() {
               <div className="flex justify-between">
                 <dt className="font-medium text-gray-900">Total</dt>
                 <dd className="text-gray-900">{`Rp ${(
-                  parseInt(product.price.replace("Rp ", "").replace(".", "")) +
-                  10000
+                  selectedOption.price + 10000
                 ).toLocaleString()}`}</dd>
               </div>
             </dl>

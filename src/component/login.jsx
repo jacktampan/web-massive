@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 import axios from "axios";
 import logo from "../assets/logo.png";
-import googleLogo from "../assets/google-logo.png";
-import facebookLogo from "../assets/facebook-logo.png";
 
 function Login() {
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   const handleLogin = async (e) => {
@@ -14,8 +12,9 @@ function Login() {
       const response = await axios.post(
         "http://23.26.138.128:3000/api/auth/login",
         {
-          email,
+          username,
           password,
+          role: "user",
         }
       );
       localStorage.setItem("token", response.data.token);
@@ -46,16 +45,16 @@ function Login() {
         </div>
         <form onSubmit={handleLogin}>
           <div className="mb-4">
-            <label className="block text-gray-700 mb-2" htmlFor="email">
-              Masukkan email anda
+            <label className="block text-gray-700 mb-2" htmlFor="username">
+              Masukkan username anda
             </label>
             <input
-              type="email"
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              type="text"
+              id="username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
               className="w-full px-3 py-2 border rounded focus:outline-none focus:border-orange-500"
-              placeholder="Email"
+              placeholder="Username"
               required
             />
           </div>
@@ -72,11 +71,6 @@ function Login() {
               placeholder="Password"
               required
             />
-          </div>
-          <div className="flex items-center justify-between mb-6">
-            <a href="#" className="text-sm text-orange-500 hover:underline">
-              Forgot Password?
-            </a>
           </div>
           <button
             type="submit"

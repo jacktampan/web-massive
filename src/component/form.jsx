@@ -58,7 +58,18 @@ export default function Checkout() {
 
   const handleConfirmOrder = (e) => {
     e.preventDefault();
-    navigate("/order-summary", { state: { product } });
+    const selectedOption = options.find(
+      (option) => option.id === selectedMethod
+    );
+    const paymentInfo = {
+      method: "Bank Transfer",
+      bank: "BNI",
+      accountNumber: "1234567890",
+    };
+
+    navigate("/order-summary", {
+      state: { product, selectedOption, paymentInfo },
+    });
   };
 
   return (
@@ -150,6 +161,7 @@ export default function Checkout() {
                         name="payment-type"
                         type="radio"
                         className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                        defaultChecked={bank === "BNI"}
                       />
                       <label
                         htmlFor={bank.toLowerCase()}
