@@ -14,37 +14,34 @@ const Page = () => {
     const fetchProduct = async () => {
       try {
         const response = await axios.get(
-          `http://38.45.67.174:3000/api/products/${id}`
+          `http://23.26.138.128:3000/api/products/${id}`
         );
         const product = response.data;
         setProduct({
           id: product.id,
           name: product.namaKost,
           price: `Rp ${product.hargaPerBulan}`,
-          rating: 4, // This field is not available in the API response, so we set it manually
           images: [
             {
               id: 1,
               name: product.namaKost,
-              src: `http://38.45.67.174:3000/uploads/${product.fotoKost}`,
+              src: `http://23.26.138.128:3000/${product.fotoKost}`,
               alt: product.namaKost,
             },
             {
               id: 2,
               name: "Luar Kamar",
-              src: `http://38.45.67.174:3000/uploads/${product.fotoLuarKamar}`,
+              src: `http://23.26.138.128:3000/${product.fotoLuarKamar}`,
               alt: "Luar Kamar",
             },
             {
               id: 3,
               name: "Dalam Kamar",
-              src: `http://38.45.67.174:3000/uploads/${product.fotoDalamKamar}`,
+              src: `http://23.26.138.128:3000/${product.fotoDalamKamar}`,
               alt: "Dalam Kamar",
             },
           ],
-          kelamin: [
-            { name: "Pria" }, // This field is also not available in the API response
-          ],
+          kelamin: product.kategoriKost,
           description: `${product.alamat}, ${product.kota}, ${product.provinsi}`,
           hargaPerBulan: product.hargaPerBulan,
           hargaPer3Bulan: product.hargaPer3Bulan,
@@ -99,22 +96,24 @@ const Page = () => {
           />
         </div>
       </div>
-      <div className="grid grid-cols-4 mt-10">
-        <h1 className="text-2xl font-bold text-gray-900">{product.name}</h1>
+      <div className="grid grid-cols-3 mt-10">
+        <h1 className="text-2xl font-bold text-gray-900">
+          Kost {product.name}
+        </h1>
         <button
           onClick={handleRentNowClick}
-          className="w-1/2 rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 col-start-4"
+          className="w-1/2 rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 col-start-3"
         >
           Rent Now
         </button>
       </div>
       <div className="bg-gray-50 w-fit p-4">
-        <p>Khusus {product.kelamin[0].name}</p>
+        <p>Khusus {product.kelamin}</p>
       </div>
       <div className="mt-4">
         <p className="text-base text-gray-900">{product.description}</p>
       </div>
-      <div className="grid grid-cols-3">
+      <div className="grid grid-cols-2">
         <div>
           <div className="mt-10">
             <h2 className="text-sm font-medium text-gray-900">
@@ -147,19 +146,6 @@ const Page = () => {
             ))}
           </ul>
         </div>
-
-        {/* <div className="col-start-3">
-          <div className="mt-10">
-            <img src={product.images[0].src} alt="" />
-          </div>
-          <div className="mt-10">
-            <ul>
-              <li>2.43 km dari Universitas Sains Al-Quran (UNSIQ)</li>
-              <li>2.33 km dari Stasiun Cisauk</li>
-              <li>0.35 km dari Alfamart</li>
-            </ul>
-          </div>
-        </div> */}
       </div>
       {isModalOpen && (
         <Modal

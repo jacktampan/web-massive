@@ -92,15 +92,6 @@ function Login() {
               Sign Up
             </a>
           </p>
-          <p className="text-gray-600 mt-2">Or login using</p>
-          <div className="flex justify-center">
-            <button className="bg-white border rounded-full p-2 mx-1 hover:bg-gray-100">
-              <img src={googleLogo} alt="Google Logo" className="h-6" />
-            </button>
-            <button className="bg-white border rounded-full p-2 mx-1 hover:bg-gray-100">
-              <img src={facebookLogo} alt="Facebook Logo" className="h-6" />
-            </button>
-          </div>
         </div>
       </div>
     </div>

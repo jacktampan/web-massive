@@ -425,7 +425,7 @@ const ProductForm = () => {
                       Successfully submit!
                     </p>
                     <p className="mt-1 text-sm text-gray-500">
-                      silakan ke menu list untuk melihat daftar kost.
+                      Silakan ke menu list untuk melihat daftar kost.
                     </p>
                   </div>
                   <div className="ml-4 flex flex-shrink-0">

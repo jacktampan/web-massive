@@ -5,14 +5,17 @@ import { useNavigate } from "react-router-dom";
 const ProductCard = ({ product }) => {
   const navigate = useNavigate();
 
-  const handleRentNow = () => {
+  const handleCardClick = () => {
     navigate(`/page/${product.id}`);
   };
 
   return (
-    <div className="bg-white dark:bg-zinc-800 shadow-lg rounded-lg overflow-hidden mx-auto max-w-96">
+    <div
+      className="bg-white dark:bg-zinc-800 shadow-lg rounded-lg overflow-hidden mx-auto max-w-96 cursor-pointer"
+      onClick={handleCardClick}
+    >
       <img
-        src={`http://38.45.67.174:3000/uploads/${product.fotoKost}`}
+        src={`http://23.26.138.128:3000/${product.fotoKost}`}
         alt={`Image of ${product.namaKost}`}
         className="w-full h-48 object-cover"
         onError={(e) =>
@@ -32,10 +35,7 @@ const ProductCard = ({ product }) => {
         <span className="text-zinc-500 dark:text-zinc-400">
           Harga per bulan:
         </span>
-        <button
-          onClick={handleRentNow}
-          className="bg-orange-500 text-black text-bold px-4 py-2 rounded-lg"
-        >
+        <button className="bg-orange-500 text-black text-bold px-4 py-2 rounded-lg">
           Rp {product.hargaPerBulan}
         </button>
       </div>
