@@ -13,7 +13,7 @@ export default function OrderSummary() {
     {
       id: product.id,
       name: product.name,
-      description: `Harga sewa untuk ${product.name}`,
+      description: `Harga sewa untuk Kost ${product.name}`,
       href: "#",
       quantity: 1,
       price: `Rp ${product.hargaPerBulan.toLocaleString()}`,
@@ -33,11 +33,6 @@ export default function OrderSummary() {
           <p className="mt-2 text-base text-gray-500">
             Pesanan kamu akan di proses setelah kami menerima pembayaran.
           </p>
-
-          <dl className="mt-12 text-sm font-medium">
-            <dt className="text-gray-900">Order ID</dt>
-            <dd className="mt-2 text-indigo-600">#14034056</dd>
-          </dl>
         </div>
 
         <div className="mt-10 border-t border-gray-200">
@@ -57,23 +52,11 @@ export default function OrderSummary() {
               <div className="flex flex-auto flex-col">
                 <div>
                   <h4 className="font-medium text-gray-900">
-                    <a href={product.href}>{product.name}</a>
+                    <a href={product.href}> Kost {product.name}</a>
                   </h4>
                   <p className="mt-2 text-sm text-gray-600">
                     {product.description}
                   </p>
-                </div>
-                <div className="mt-6 flex flex-1 items-end">
-                  <dl className="flex space-x-4 divide-x divide-gray-200 text-sm sm:space-x-6">
-                    {/* <div className="flex">
-                      <dt className="font-medium text-gray-900">Quantity</dt>
-                      <dd className="ml-2 text-gray-700">{product.quantity}</dd>
-                    </div> */}
-                    <div className="flex pl-4 sm:pl-6">
-                      <dt className="font-medium text-gray-900">Price</dt>
-                      <dd className="ml-2 text-gray-700">{product.price}</dd>
-                    </div>
-                  </dl>
                 </div>
               </div>
             </div>
@@ -97,14 +80,6 @@ export default function OrderSummary() {
             <h3 className="sr-only">Summary</h3>
 
             <dl className="space-y-6 border-t border-gray-200 pt-10 text-sm">
-              <div className="flex justify-between">
-                <dt className="font-medium text-gray-900">Subtotal</dt>
-                <dd className="text-gray-700">{product.price}</dd>
-              </div>
-              {/* <div className="flex justify-between">
-                <dt className="font-medium text-gray-900">Shipping</dt>
-                <dd className="text-gray-700">Rp 10,000</dd>
-              </div> */}
               <div className="flex justify-between">
                 <dt className="font-medium text-gray-900">Total</dt>
                 <dd className="text-gray-900">{`Rp ${(

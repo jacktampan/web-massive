@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { RadioGroup } from "@headlessui/react";
-import { CheckCircleIcon, TrashIcon } from "@heroicons/react/20/solid";
+import { CheckCircleIcon } from "@heroicons/react/20/solid";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -21,7 +21,7 @@ export default function Checkout() {
       const fetchOptions = async () => {
         try {
           const response = await axios.get(
-            `http://38.45.67.174:3000/api/products/${product.id}`
+            `http://23.26.138.128:3000/api/products/${product.id}`
           );
           const data = response.data;
           setOptions([
@@ -73,31 +73,7 @@ export default function Checkout() {
           <div>
             <div>
               <h2 className="text-lg font-medium text-gray-900">
-                Contact information
-              </h2>
-
-              <div className="mt-4">
-                <label
-                  htmlFor="email-address"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Email address
-                </label>
-                <div className="mt-1">
-                  <input
-                    type="email"
-                    id="email-address"
-                    name="email-address"
-                    autoComplete="email"
-                    className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                  />
-                </div>
-              </div>
-            </div>
-
-            <div className="mt-10 border-t border-gray-200 pt-10">
-              <h2 className="text-lg font-medium text-gray-900">
-                Rental Period
+                Jangka Waktu
               </h2>
 
               <RadioGroup value={selectedMethod} onChange={setSelectedMethod}>
@@ -210,20 +186,9 @@ export default function Checkout() {
                         <div className="min-w-0 flex-1">
                           <h4 className="text-sm">
                             <span className="font-medium text-gray-700 hover:text-gray-800">
-                              {product.name}
+                              Kost {product.name}
                             </span>
                           </h4>
-                          <p className="mt-1 text-sm text-gray-500">Kost</p>
-                        </div>
-
-                        <div className="ml-4 flow-root flex-shrink-0">
-                          <button
-                            type="button"
-                            className="-m-2.5 flex items-center justify-center bg-white p-2.5 text-gray-400 hover:text-gray-500"
-                          >
-                            <span className="sr-only">Remove</span>
-                            <TrashIcon className="h-5 w-5" aria-hidden="true" />
-                          </button>
                         </div>
                       </div>
 
@@ -241,44 +206,6 @@ export default function Checkout() {
                   <p>No product selected</p>
                 )}
               </ul>
-              <dl className="space-y-6 border-t border-gray-200 px-4 py-6 sm:px-6">
-                <div className="flex items-center justify-between">
-                  <dt className="text-sm">Subtotal</dt>
-                  <dd className="text-sm font-medium text-gray-900">
-                    Rp{" "}
-                    {options
-                      .find((option) => option.id === selectedMethod)
-                      ?.price.toLocaleString()}
-                  </dd>
-                </div>
-                <div className="flex items-center justify-between">
-                  <dt className="text-sm">Rental Price</dt>
-                  <dd className="text-sm font-medium text-gray-900">
-                    Rp{" "}
-                    {options
-                      .find((option) => option.id === selectedMethod)
-                      ?.price.toLocaleString()}
-                  </dd>
-                </div>
-                <div className="flex items-center justify-between">
-                  <dt className="text-sm">Taxes</dt>
-                  <dd className="text-sm font-medium text-gray-900">$0.00</dd>
-                </div>
-                <div className="flex items-center justify-between border-t border-gray-200 pt-6">
-                  <dt className="text-base font-medium">Total</dt>
-                  <dd className="text-base font-medium text-gray-900">
-                    {product && selectedMethod
-                      ? parseFloat(
-                          options.find((option) => option.id === selectedMethod)
-                            ?.price || 0
-                        ).toLocaleString("id-ID", {
-                          style: "currency",
-                          currency: "IDR",
-                        })
-                      : "Rp 0.00"}
-                  </dd>
-                </div>
-              </dl>
 
               <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
                 <button
