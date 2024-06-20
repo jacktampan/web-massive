@@ -15,7 +15,7 @@ const ProductCard = ({ product }) => {
       onClick={handleCardClick}
     >
       <img
-        src={`http://23.26.138.128:3000/${product.fotoKost}`}
+        src={`http://104.234.231.224:3000/${product.fotoKost}`}
         alt={`Image of ${product.namaKost}`}
         className="w-full h-48 object-cover"
         onError={(e) =>

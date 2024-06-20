@@ -28,8 +28,8 @@ function AdminLogin() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-white">
-      <div className="bg-white p-8 rounded shadow-lg w-full max-w-sm">
+    <div className="flex items-center justify-center">
+      <div className="p-8 rounded border-solid border w-full max-w-sm">
         <div className="text-center mb-6">
           <img
             src={logo}
@@ -46,7 +46,7 @@ function AdminLogin() {
         <form onSubmit={handleLogin}>
           <div className="mb-4">
             <label className="block text-gray-700 mb-2" htmlFor="username">
-              Masukkan username anda
+              Your username
             </label>
             <input
               type="text"
@@ -60,7 +60,7 @@ function AdminLogin() {
           </div>
           <div className="mb-4">
             <label className="block text-gray-700 mb-2" htmlFor="password">
-              Masukkan password anda
+              Your password
             </label>
             <input
               type="password"
@@ -71,11 +71,6 @@ function AdminLogin() {
               placeholder="Password"
               required
             />
-          </div>
-          <div className="flex items-center justify-between mb-6">
-            <a href="#" className="text-sm text-orange-500 hover:underline">
-              Forgot Password?
-            </a>
           </div>
           <button
             type="submit"

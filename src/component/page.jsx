@@ -1,11 +1,14 @@
+// ProductPage.jsx
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
-import Modal from "./modal";
+import Modal from "../Modal";
+import { useAuth } from "../AuthContext";
 
 const Page = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { isLoggedIn } = useAuth();
   const [product, setProduct] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalImageSrc, setModalImageSrc] = useState("");
@@ -14,7 +17,7 @@ const Page = () => {
     const fetchProduct = async () => {
       try {
         const response = await axios.get(
-          `http://23.26.138.128:3000/api/products/${id}`
+          `http://104.234.231.224:3000/api/products/${id}`
         );
         const product = response.data;
         setProduct({
@@ -25,19 +28,19 @@ const Page = () => {
             {
               id: 1,
               name: product.namaKost,
-              src: `http://23.26.138.128:3000/${product.fotoKost}`,
+              src: `http://104.234.231.224:3000/${product.fotoKost}`,
               alt: product.namaKost,
             },
             {
               id: 2,
               name: "Luar Kamar",
-              src: `http://23.26.138.128:3000/${product.fotoLuarKamar}`,
+              src: `http://104.234.231.224:3000/${product.fotoLuarKamar}`,
               alt: "Luar Kamar",
             },
             {
               id: 3,
               name: "Dalam Kamar",
-              src: `http://23.26.138.128:3000/${product.fotoDalamKamar}`,
+              src: `http://104.234.231.224:3000/${product.fotoDalamKamar}`,
               alt: "Dalam Kamar",
             },
           ],
@@ -65,7 +68,11 @@ const Page = () => {
   };
 
   const handleRentNowClick = () => {
-    navigate(`/checkout`, { state: { product } });
+    if (!isLoggedIn) {
+      setIsModalOpen(true);
+    } else {
+      navigate(`/checkout`, { state: { product } });
+    }
   };
 
   if (!product) {
@@ -75,25 +82,31 @@ const Page = () => {
   return (
     <div className="container mx-auto p-14">
       <div className="flex justify-center items-center gap-14">
-        <img
-          src={product.images[0].src}
-          alt="Hero Image"
-          onClick={() => handleImageClick(product.images[0].src)}
-          className="cursor-pointer"
-        />
+        {product.images?.[0]?.src && (
+          <img
+            src={product.images[0].src}
+            alt="Hero Image"
+            onClick={() => handleImageClick(product.images[0].src)}
+            className="cursor-pointer"
+          />
+        )}
         <div className="flex flex-col gap-4">
-          <img
-            src={product.images[1].src}
-            alt="Hero Image"
-            onClick={() => handleImageClick(product.images[1].src)}
-            className="cursor-pointer max-h-36"
-          />
-          <img
-            src={product.images[2].src}
-            alt="Hero Image"
-            onClick={() => handleImageClick(product.images[2].src)}
-            className="cursor-pointer max-h-36"
-          />
+          {product.images?.[1]?.src && (
+            <img
+              src={product.images[1].src}
+              alt="Hero Image"
+              onClick={() => handleImageClick(product.images[1].src)}
+              className="cursor-pointer max-h-36"
+            />
+          )}
+          {product.images?.[2]?.src && (
+            <img
+              src={product.images[2].src}
+              alt="Hero Image"
+              onClick={() => handleImageClick(product.images[2].src)}
+              className="cursor-pointer max-h-36"
+            />
+          )}
         </div>
       </div>
       <div className="grid grid-cols-3 mt-10">
@@ -151,8 +164,19 @@ const Page = () => {
         <Modal
           isOpen={isModalOpen}
           onClose={() => setIsModalOpen(false)}
-          imageSrc={modalImageSrc}
-        />
+          contentLabel="Please Login"
+        >
+          <div className="text-center p-6">
+            <h2 className="text-2xl font-bold mb-4">Please Login</h2>
+            <p className="mb-4">You need to login to rent this product.</p>
+            <button
+              onClick={() => navigate("/login")}
+              className="w-full bg-indigo-600 text-white py-2 rounded hover:bg-indigo-700 transition duration-200"
+            >
+              Login
+            </button>
+          </div>
+        </Modal>
       )}
     </div>
   );

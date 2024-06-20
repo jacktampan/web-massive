@@ -10,7 +10,7 @@ function Login() {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://23.26.138.128:3000/api/auth/login",
+        "http://104.234.231.224:3000/api/auth/login",
         {
           username,
           password,
@@ -28,8 +28,8 @@ function Login() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-white">
-      <div className="bg-white p-8 rounded shadow-lg w-full max-w-sm">
+    <div className="flex items-center justify-center">
+      <div className="p-8 rounded border-solid border w-full max-w-sm">
         <div className="text-center mb-6">
           <img
             src={logo}
@@ -40,7 +40,7 @@ function Login() {
             Welcome to KostCozy
           </h2>
           <p className="text-gray-600">
-            Please enter your email and password to login.
+            Please enter your username and password to login.
           </p>
         </div>
         <form onSubmit={handleLogin}>

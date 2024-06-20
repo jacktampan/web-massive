@@ -1,17 +1,50 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import profilePic from "../assets/profile.png";
-import { Input } from "@headlessui/react";
 
 const AccountSettings = () => {
+  const [profile, setProfile] = useState(null);
+  const [orders, setOrders] = useState([]);
   const [formData, setFormData] = useState({
     username: "",
     email: "",
-    new_address: "",
-    phone_number: "",
-    old_password: "",
-    new_password: "",
-    confirm_password: "",
   });
+
+  useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        const profileResponse = await axios.get(
+          "http://104.234.231.224:3000/api/users/profile",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        const profileData = profileResponse.data;
+        setProfile(profileData);
+        setFormData({
+          username: profileData.username,
+          email: profileData.email,
+        });
+
+        const ordersResponse = await axios.get(
+          "http://104.234.231.224:3000/api/orders",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        setOrders(ordersResponse.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchProfile();
+  }, []);
 
   const handleChange = (e) => {
     setFormData({
@@ -23,25 +56,20 @@ const AccountSettings = () => {
   const handleSave = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(
-        "http://38.45.67.174:3000/api/user/settings",
+      const token = localStorage.getItem("token");
+      await axios.put(
+        "http://104.234.231.224:3000/api/users/profile",
+        formData,
         {
-          method: "PUT",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            Authorization: `Bearer ${token}`,
           },
-          body: JSON.stringify(formData),
         }
       );
-
-      if (!response.ok) {
-        throw new Error("Failed to save settings");
-      }
-
-      alert("Settings saved!");
+      alert("Profile updated!");
     } catch (error) {
-      alert(error.message);
+      alert("Failed to save profile");
     }
   };
 
@@ -51,8 +79,12 @@ const AccountSettings = () => {
     window.location.href = "/login"; // Redirect to login page
   };
 
-  const renderProfileInformation = () => {
-    return (
+  if (!profile) {
+    return <div>Loading...</div>;
+  }
+
+  return (
+    <div className="account-settings p-8 bg-white shadow-md rounded-lg max-w-2xl mx-auto">
       <div className="profile-information text-center mb-8">
         <img
           src={profilePic}
@@ -60,26 +92,19 @@ const AccountSettings = () => {
           className="profile-picture w-24 h-24 rounded-full mx-auto"
         />
         <h2 className="profile-name text-xl font-semibold mt-4">
-          Luthfi Firmansyah
+          {profile.username}
         </h2>
-        <p className="profile-email text-gray-600">Luthfiajaz@gmail.com</p>
+        <p className="profile-email text-gray-600">{profile.email}</p>
       </div>
-    );
-  };
 
-  const renderAccountSettingsForm = () => {
-    return (
       <div className="account-settings-form mb-8">
         <h3 className="form-heading text-lg font-semibold mb-4">
           Account Settings
         </h3>
-        <p className="form-description text-gray-600 mb-4">
-          Here you can change account information
-        </p>
-        <form>
+        <form onSubmit={handleSave}>
           <div className="mb-4">
-            <label className="block text-gray-700 mb-2">Username*</label>
-            <Input
+            <label className="block text-gray-700 mb-2">Username</label>
+            <input
               name="username"
               type="text"
               value={formData.username}
@@ -88,8 +113,8 @@ const AccountSettings = () => {
             />
           </div>
           <div className="mb-4">
-            <label className="block text-gray-700 mb-2">Email Address*</label>
-            <Input
+            <label className="block text-gray-700 mb-2">Email</label>
+            <input
               name="email"
               type="email"
               value={formData.email}
@@ -97,102 +122,51 @@ const AccountSettings = () => {
               className="w-full p-2 border border-gray-300 rounded-lg"
             />
           </div>
-          <div className="mb-4">
-            <label className="block text-gray-700 mb-2">New Address</label>
-            <Input
-              name="new_address"
-              type="text"
-              value={formData.new_address}
-              onChange={handleChange}
-              className="w-full p-2 border border-gray-300 rounded-lg"
-            />
-          </div>
-          <div className="mb-4">
-            <label className="block text-gray-700 mb-2">Phone Number</label>
-            <Input
-              name="phone_number"
-              type="tel"
-              value={formData.phone_number}
-              onChange={handleChange}
-              className="w-full p-2 border border-gray-300 rounded-lg"
-            />
+          <div className="buttons flex justify-between">
+            <button
+              type="submit"
+              className="save-button bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600"
+            >
+              Save
+            </button>
+            <button
+              type="button"
+              className="logout-button bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-600"
+              onClick={handleLogout}
+            >
+              Logout
+            </button>
           </div>
         </form>
       </div>
-    );
-  };
 
-  const renderChangePasswordForm = () => {
-    return (
-      <div className="change-password-form mb-8">
-        <h3 className="form-heading text-lg font-semibold mb-4">
-          Change Password
-        </h3>
-        <form>
-          <div className="mb-4">
-            <label className="block text-gray-700 mb-2">Old Password*</label>
-            <Input
-              name="old_password"
-              type="password"
-              value={formData.old_password}
-              onChange={handleChange}
-              className="w-full p-2 border border-gray-300 rounded-lg"
-            />
-          </div>
-          <div className="mb-4">
-            <label className="block text-gray-700 mb-2">New Password*</label>
-            <Input
-              name="new_password"
-              type="password"
-              value={formData.new_password}
-              onChange={handleChange}
-              className="w-full p-2 border border-gray-300 rounded-lg"
-            />
-          </div>
-          <div className="mb-4">
-            <label className="block text-gray-700 mb-2">
-              Confirm Password*
-            </label>
-            <Input
-              name="confirm_password"
-              type="password"
-              value={formData.confirm_password}
-              onChange={handleChange}
-              className="w-full p-2 border border-gray-300 rounded-lg"
-            />
-          </div>
-        </form>
+      <div className="orders mb-8">
+        <h3 className="form-heading text-lg font-semibold mb-4">My Orders</h3>
+        {orders.length > 0 ? (
+          <ul>
+            {orders.map((order) => (
+              <li key={order.id} className="border-b border-gray-300 py-4">
+                <div>
+                  <span className="font-semibold">Kost ID:</span> {order.kostId}
+                </div>
+                <div>
+                  <span className="font-semibold">Duration:</span>{" "}
+                  {order.duration}
+                </div>
+                <div>
+                  <span className="font-semibold">Total Price:</span> Rp{" "}
+                  {order.totalPrice.toLocaleString()}
+                </div>
+                <div>
+                  <span className="font-semibold">Status:</span> {order.status}
+                </div>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p>No orders found.</p>
+        )}
       </div>
-    );
-  };
-
-  const renderButtons = () => {
-    return (
-      <div className="buttons flex justify-between">
-        <button
-          className="save-button bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600"
-          onClick={handleSave}
-        >
-          Save
-        </button>
-        <button
-          className="logout-button bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-600"
-          onClick={handleLogout}
-        >
-          Logout
-        </button>
-      </div>
-    );
-  };
-
-  return (
-    <div className="account-settings p-8 bg-white shadow-md rounded-lg max-w-2xl mx-auto">
-      {renderProfileInformation()}
-      <div className="forms">
-        {renderAccountSettingsForm()}
-        {renderChangePasswordForm()}
-      </div>
-      {renderButtons()}
     </div>
   );
 };
