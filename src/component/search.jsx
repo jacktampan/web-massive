@@ -56,7 +56,7 @@ function SearchForm() {
 
   return (
     <div className="container mx-auto p-4">
-      <section className="bg-gray-100 dark:bg-zinc-800 flex justify-center p-4">
+      <section className="bg-custom-color dark:bg-zinc-800 flex justify-center p-4">
         <form
           className="flex flex-col md:flex-row justify-center items-center gap-4 w-full max-w-5xl"
           onSubmit={(e) => {
@@ -109,7 +109,7 @@ function SearchForm() {
           />
 
           <button
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full focus:outline-none focus:shadow-outline"
+            className="bg-custom-orange hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full focus:outline-none focus:shadow-outline"
             type="submit"
           >
             Search

@@ -96,84 +96,87 @@ const Page = () => {
   }
 
   return (
-    <div className="container mx-auto p-14">
-      <div className="flex justify-center items-center gap-14">
+    <div className="container mx-auto p-6">
+      <div className="flex flex-col md:flex-row justify-center items-center gap-6 md:gap-14">
         {product.images?.[0]?.src && (
           <img
             src={product.images[0].src}
             alt="Hero Image"
             onClick={() => handleImageClick(product.images[0].src)}
-            className="cursor-pointer"
+            className="cursor-pointer rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
           />
         )}
         <div className="flex flex-col gap-4">
           {product.images?.[1]?.src && (
             <img
               src={product.images[1].src}
-              alt="Hero Image"
+              alt="Luar Kamar"
               onClick={() => handleImageClick(product.images[1].src)}
-              className="cursor-pointer max-h-36"
+              className="cursor-pointer max-h-36 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
             />
           )}
           {product.images?.[2]?.src && (
             <img
               src={product.images[2].src}
-              alt="Hero Image"
+              alt="Dalam Kamar"
               onClick={() => handleImageClick(product.images[2].src)}
-              className="cursor-pointer max-h-36"
+              className="cursor-pointer max-h-36 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
             />
           )}
         </div>
       </div>
-      <div className="grid grid-cols-3 mt-10">
-        <h1 className="text-2xl font-bold text-gray-900">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-10">
+        <h1 className="text-3xl font-bold text-gray-900 col-span-2">
           Kost {product.name}
         </h1>
         <button
           onClick={handleRentNowClick}
-          className="w-1/2 rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 col-start-3"
+          className="w-full rounded-md bg-orange-500 text-white py-3 text-lg font-semibold hover:bg-orange-600 transition duration-200 col-start-3"
         >
-          Rent Now
+          Rp {product.hargaPerBulan}/bulan
         </button>
       </div>
-      <div className="bg-gray-50 w-fit p-4">
-        <p>Khusus {product.kelamin}</p>
+      <div className="bg-gray-100 w-fit p-2 rounded-lg mt-4">
+        <p className="text-sm text-gray-700">Khusus {product.kelamin}</p>
       </div>
       <div className="mt-4">
-        <p className="text-base text-gray-900">{product.description}</p>
+        <p className="text-base text-gray-700">{product.description}</p>
       </div>
-      <div className="grid grid-cols-2">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-10">
         <div>
-          <div className="mt-10">
-            <h2 className="text-sm font-medium text-gray-900">
+          <div className="mt-6">
+            <h2 className="text-lg font-medium text-gray-900">
               Fasilitas Bersama
             </h2>
+            <hr className="border-t border-gray-300 my-2" />
+            <ul className="list-disc list-inside text-gray-700">
+              {product.fasilitasBersama.map((fasilitas, index) => (
+                <li key={index}>{fasilitas}</li>
+              ))}
+            </ul>
           </div>
-          <ul className="list-disc list-inside">
-            {product.fasilitasBersama.map((fasilitas, index) => (
-              <li key={index}>{fasilitas}</li>
-            ))}
-          </ul>
 
-          <div className="mt-10">
-            <h2 className="text-sm font-medium text-gray-900">
+          <div className="mt-6">
+            <h2 className="text-lg font-medium text-gray-900">
               Fasilitas Kamar
             </h2>
+            <hr className="border-t border-gray-300 my-2" />
+            <ul className="list-disc list-inside text-gray-700 grid grid-cols-1 md:grid-cols-2 gap-2">
+              {product.fasilitasKamar.map((fasilitas, index) => (
+                <li key={index}>{fasilitas}</li>
+              ))}
+            </ul>
           </div>
-          <ul className="list-disc list-inside grid grid-cols-2">
-            {product.fasilitasKamar.map((fasilitas, index) => (
-              <li key={index}>{fasilitas}</li>
-            ))}
-          </ul>
 
-          <div className="mt-10">
-            <h2 className="text-sm font-medium text-gray-900">Tata Tertib</h2>
+          <div className="mt-6">
+            <h2 className="text-lg font-medium text-gray-900">Tata Tertib</h2>
+            <hr className="border-t border-gray-300 my-2" />
+            <ul className="list-disc list-inside text-gray-700">
+              {product.peraturan.map((aturan, index) => (
+                <li key={index}>{aturan}</li>
+              ))}
+            </ul>
           </div>
-          <ul className="list-disc list-inside">
-            {product.peraturan.map((aturan, index) => (
-              <li key={index}>{aturan}</li>
-            ))}
-          </ul>
         </div>
       </div>
       {isModalOpen && (

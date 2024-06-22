@@ -8,7 +8,7 @@ const WelcomePage = () => {
       <div className="flex flex-wrap justify-center md:justify-between items-center">
         <div className="flex md:flex-row items-center md:w-1/2">
           <div className="text-center md:text-left md:pr-8">
-            <h1 className="text-4xl font-bold text-orange-500 dark:text-white">
+            <h1 className="text-5xl text-custom-orange dark:text-white">
               Sekarang Cari Kost Semudah Rebahan
             </h1>
             <p className="mt-4 text-zinc-600 dark:text-zinc-300">

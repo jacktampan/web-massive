@@ -11,6 +11,9 @@ export default {
         'custom-color1': '#C6E9ED',
         'custom-footer': '#5A5A5A',
       },
+      fontFamily: {
+        'sans': ['Roboto', 'sans-serif'],
+      },
     },
   },
   plugins: [

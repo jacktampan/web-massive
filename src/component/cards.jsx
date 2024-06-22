@@ -38,7 +38,7 @@ const Cards = () => {
 
   return (
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-center">
-      <h1 className="text-2xl font-bold text-center my-8 dark:text-white text-orange-500">
+      <h1 className="text-3xl text-center my-8 dark:text-white text-custom-orange">
         Cari Kost Pilihan Kamu
       </h1>
       <div className="inline-grid md:grid-cols-3 gap-4">
@@ -47,7 +47,7 @@ const Cards = () => {
         ))}
       </div>
       <Link to="/list">
-        <Button className="rounded bg-orange-500 mt-4 py-2 px-4 text-sm text-white data-[hover]:bg-sky-500 data-[active]:bg-sky-700">
+        <Button className="mt-8 bg-custom-orange text-white px-4 py-2 rounded">
           Lihat Semua
         </Button>
       </Link>

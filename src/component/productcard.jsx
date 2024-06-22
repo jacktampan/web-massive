@@ -31,13 +31,15 @@ const ProductCard = ({ product }) => {
           {product.alamat}, {product.kota}, {product.provinsi}
         </p>
       </div>
-      <div className="flex justify-between items-center p-4 gap-4">
-        <span className="text-zinc-500 dark:text-zinc-400">
-          Harga per bulan:
-        </span>
-        <button className="bg-orange-500 text-black text-bold px-4 py-2 rounded-lg">
-          Rp {product.hargaPerBulan}
-        </button>
+      <div className="flex justify-end p-4">
+        <div className="flex flex-col items-end gap-2">
+          <span className="text-zinc-500 dark:text-zinc-400">
+            Harga per bulan:
+          </span>
+          <button className="bg-custom-orange text-black font-bold px-4 py-2 rounded-lg">
+            Rp {product.hargaPerBulan}
+          </button>
+        </div>
       </div>
     </div>
   );

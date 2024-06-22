@@ -7,7 +7,7 @@ import smallImage3 from "../assets/small-image3.jpeg";
 const Welcome = () => {
   return (
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mt-8">
-      <div className="bg-white dark:bg-zinc-800 flex flex-col md:flex-row justify-center items-center">
+      <div className="bg-white dark:bg-zinc-800 flex flex-col md:flex-row ">
         <WelcomeText />
         <ImageSection />
       </div>
@@ -18,21 +18,31 @@ const Welcome = () => {
 const WelcomeText = () => {
   return (
     <div className="text-black md:w-1/2">
-      <h1 className="text-4xl font-bold mb-3 text-center text-orange-500">
+      <h1 className="text-5xl text-center text-custom-orange">
         Nice to meet you
       </h1>
-      <p className="text-zinc-600 mb-2">
+      <br />
+      <p>
         Selamat datang di KostCozy, tempat yang nyaman dan aman bagi para
         mahasiswa yang sedang mencari kos yang terdekat pada kampus. Kami adalah
         tim yang berdedikasi untuk memberikan pengalaman tinggal yang terbaik
-        bagi para Mahasiswa. Di KostCozy, kami mengerti betapa pentingnya
-        memiliki tempat tinggal yang nyaman dan bersih. Itulah sebabnya kami
-        berkomitmen untuk menyediakan fasilitas yang berkualitas dan pelayanan
-        yang ramah kepada semua penghuni kami. Kami berharap Anda menemukan
-        tempat yang sempurna untuk tinggal di Rumah Kost dan merasa seperti di
-        rumah sendiri. Terima kasih atas kepercayaan Anda kepada kami.
+        bagi para Mahasiswa.
       </p>
-      <p className="text-zinc-600 mt-5">
+      <br />
+      <p>
+        Di KostCozy, kami mengerti betapa pentingnya memiliki tempat tinggal
+        yang nyaman dan bersih. Itulah sebabnya kami berkomitmen untuk
+        menyediakan fasilitas yang berkualitas dan pelayanan yang ramah kepada
+        semua penghuni kami.
+      </p>
+      <br />
+      <p>
+        Kami berharap Anda menemukan tempat yang sempurna untuk tinggal di Rumah
+        Kost dan merasa seperti di rumah sendiri. Terima kasih atas kepercayaan
+        Anda kepada kami.
+      </p>
+      <br />
+      <p>
         Salam hangat,
         <br />
         Tim KostCozy
