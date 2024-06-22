@@ -1,32 +1,23 @@
 import React from "react";
-import user1 from "../assets/orang.jpg"; // Ganti dengan path gambar yang sebenarnya
-import user2 from "../assets/orang.jpg";
-import user3 from "../assets/orang.jpg";
 
 const reviews = [
   {
     id: 1,
     name: "Jauhar Latifah",
     review:
-      "“sangat nyaman, mudah digunakan, dan tentunya sangat aman. dan ini sangat direkomendasikan dipakai untuk teman teman yang sedang mencari kost kostan”.",
-    image: user1,
-    role: "Pengguna Senang",
+      "KostCozy sangat membantu dalam mencari kost yang sesuai dengan kebutuhan saya. Antarmukanya mudah digunakan dan informasinya lengkap. Saya sangat merekomendasikan aplikasi ini untuk teman-teman yang sedang mencari kost!.",
   },
   {
     id: 2,
     name: "Laily Khayati",
     review:
-      "“sangat nyaman, mudah digunakan, dan tentunya sangat aman. dan ini sangat direkomendasikan dipakai untuk teman teman yang sedang mencari kost kostan”.",
-    image: user2,
-    role: "Pengguna Senang",
+      "Pengalaman saya menggunakan aplikasi ini sangat memuaskan. Proses pencarian kost menjadi lebih cepat dan efisien. Fitur-fitur yang disediakan sangat membantu dan membuat saya merasa aman dalam memilih tempat tinggal. Sangat direkomendasikan untuk siapa saja yang sedang mencari kost!",
   },
   {
     id: 3,
     name: "Anandha Army Antassa",
     review:
-      "“sangat nyaman, mudah digunakan, dan tentunya sangat aman. dan ini sangat direkomendasikan dipakai untuk teman teman yang sedang mencari kost kostan”.",
-    image: user3,
-    role: "Pengguna Senang",
+      "Aplikasi ini benar-benar memudahkan proses pencarian kost. Fitur-fiturnya sangat user-friendly dan memberikan banyak pilihan yang sesuai dengan kebutuhan saya. Saya merasa aman dan puas menggunakan aplikasi ini. Highly recommended untuk teman-teman yang mencari kost!",
   },
 ];
 
@@ -35,14 +26,8 @@ const ReviewCard = ({ review }) => {
     <div className="max-w-sm bg-white rounded-lg shadow-lg p-6 m-4">
       <p className="text-zinc-600 italic mb-4">“{review.review}”</p>
       <div className="flex items-center">
-        <img
-          src={review.image}
-          alt={review.name}
-          className="w-12 h-12 rounded-full mr-4"
-        />
         <div>
           <p className="font-bold text-zinc-800">{review.name}</p>
-          <p className="text-zinc-500">{review.role}</p>
         </div>
       </div>
     </div>
@@ -52,7 +37,7 @@ const ReviewCard = ({ review }) => {
 const UserReviews = () => {
   return (
     <div className="container mx-auto py-12">
-      <h1 className="text-4xl font-bold text-orange-500 text-center mb-4">
+      <h1 className="text-4xl font-bold text-custom-orange text-center mb-4">
         Ulasan Pengguna Tentang KostCozy
       </h1>
       <p className="text-zinc-700 text-center mb-8">

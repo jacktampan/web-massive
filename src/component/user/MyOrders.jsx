@@ -3,8 +3,8 @@ import axios from "axios";
 
 const MyOrders = () => {
   const [orders, setOrders] = useState([]);
-  const [selectedOrder, setSelectedOrder] = useState(null);
   const [paymentProof, setPaymentProof] = useState(null);
+  const [uploadedOrderIds, setUploadedOrderIds] = useState([]);
 
   useEffect(() => {
     const fetchOrders = async () => {
@@ -19,6 +19,10 @@ const MyOrders = () => {
           }
         );
         setOrders(ordersResponse.data);
+        const uploadedOrders = ordersResponse.data
+          .filter((order) => order.paymentProof)
+          .map((order) => order.id);
+        setUploadedOrderIds(uploadedOrders);
       } catch (error) {
         console.error("Error fetching orders:", error);
       }
@@ -53,6 +57,14 @@ const MyOrders = () => {
         }
       );
       alert("Payment proof uploaded successfully!");
+      setUploadedOrderIds([...uploadedOrderIds, orderId]);
+      setOrders(
+        orders.map((order) =>
+          order.id === orderId
+            ? { ...order, paymentProof: formData.get("paymentProof").name }
+            : order
+        )
+      );
     } catch (error) {
       console.error("Error uploading payment proof:", error);
       alert("Failed to upload payment proof");
@@ -60,14 +72,15 @@ const MyOrders = () => {
   };
 
   return (
-    <div className="my-orders p-8 bg-white solid border rounded-lg max-w-2xl mx-auto">
+    <div className="my-orders p-8 bg-white border rounded-lg max-w-2xl mx-auto">
       <h3 className="form-heading text-lg font-semibold mb-4">My Orders</h3>
       {orders.length > 0 ? (
         <ul>
           {orders.map((order) => (
             <li key={order.id} className="border-b border-gray-300 py-4">
               <div>
-                <span className="font-semibold">Kost ID:</span> {order.kostId}
+                <span className="font-semibold">Nama Kost:</span>{" "}
+                {order.Product.namaKost}
               </div>
               <div>
                 <span className="font-semibold">Duration:</span>{" "}
@@ -81,13 +94,26 @@ const MyOrders = () => {
                 <span className="font-semibold">Status:</span> {order.status}
               </div>
               <div>
-                <input type="file" onChange={handleFileChange} />
-                <button
-                  onClick={() => handleUpload(order.id)}
-                  className="upload-button bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600"
-                >
-                  Upload Payment Proof
-                </button>
+                {!uploadedOrderIds.includes(order.id) && (
+                  <>
+                    <input type="file" onChange={handleFileChange} />
+                    <button
+                      onClick={() => handleUpload(order.id)}
+                      className="upload-button bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600"
+                    >
+                      Upload Payment Proof
+                    </button>
+                  </>
+                )}
+                {uploadedOrderIds.includes(order.id) &&
+                  order.status === "pending" && (
+                    <p className="text-yellow-500">
+                      Payment proof uploaded. Waiting for confirmation.
+                    </p>
+                  )}
+                {order.status === "confirmed" && (
+                  <p className="text-green-500">Payment confirmed.</p>
+                )}
               </div>
             </li>
           ))}

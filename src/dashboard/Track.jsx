@@ -16,7 +16,7 @@ function MainComponent() {
             },
           }
         );
-        console.log("Fetched orders:", response.data); // Logging fetched data
+        console.log("Fetched orders:", response.data);
         setOrders(response.data);
       } catch (error) {
         console.error("Error fetching orders:", error);
@@ -57,6 +57,7 @@ function MainComponent() {
             <tr className="bg-gray-200">
               <th className="text-left p-4">Order ID</th>
               <th className="text-left p-4">User Name</th>
+              <th className="text-left p-4">Nama Kost</th>
               <th className="text-left p-4">Status</th>
               <th className="text-left p-4">Payment Proof</th>
               <th className="text-left p-4">Actions</th>
@@ -68,6 +69,7 @@ function MainComponent() {
                 <tr key={order.id}>
                   <td className="p-4">{order.id}</td>
                   <td className="p-4">{order.User.username}</td>
+                  <td className="p-4">{order.Product.namaKost}</td>
                   <td
                     className={`p-4 ${
                       order.status === "pending"
@@ -101,7 +103,7 @@ function MainComponent() {
               ))
             ) : (
               <tr>
-                <td className="p-4" colSpan="5">
+                <td className="p-4" colSpan="6">
                   No orders found.
                 </td>
               </tr>

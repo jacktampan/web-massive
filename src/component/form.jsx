@@ -125,7 +125,7 @@ export default function Checkout() {
                         className={({ active }) =>
                           classNames(
                             active
-                              ? "ring-2 ring-offset-2 ring-indigo-500"
+                              ? "ring-2 ring-offset-2 ring-custom-orange"
                               : "",
                             "relative block bg-white border border-gray-300 rounded-lg shadow-sm px-6 py-4 cursor-pointer focus:outline-none sm:flex sm:justify-between"
                           )
@@ -152,7 +152,7 @@ export default function Checkout() {
                             <div
                               className={classNames(
                                 checked
-                                  ? "border-indigo-500"
+                                  ? "border-custom-orange"
                                   : "border-transparent",
                                 "absolute -inset-px rounded-lg border-2 pointer-events-none"
                               )}
@@ -160,7 +160,7 @@ export default function Checkout() {
                             />
                             {checked ? (
                               <CheckCircleIcon
-                                className="h-5 w-5 text-indigo-600"
+                                className="h-5 w-5 text-custom-orange"
                                 aria-hidden="true"
                               />
                             ) : null}
@@ -193,7 +193,7 @@ export default function Checkout() {
                         className={({ active }) =>
                           classNames(
                             active
-                              ? "ring-2 ring-offset-2 ring-indigo-500"
+                              ? "ring-2 ring-offset-2 ring-custom-orange"
                               : "",
                             "relative block bg-white border border-gray-300 rounded-lg shadow-sm px-6 py-4 cursor-pointer focus:outline-none sm:flex sm:justify-between"
                           )
@@ -214,7 +214,7 @@ export default function Checkout() {
                             <div
                               className={classNames(
                                 checked
-                                  ? "border-indigo-500"
+                                  ? "border-custom-orange"
                                   : "border-transparent",
                                 "absolute -inset-px rounded-lg border-2 pointer-events-none"
                               )}
@@ -222,7 +222,7 @@ export default function Checkout() {
                             />
                             {checked ? (
                               <CheckCircleIcon
-                                className="h-5 w-5 text-indigo-600"
+                                className="h-5 w-5 text-custom-orange"
                                 aria-hidden="true"
                               />
                             ) : null}
@@ -236,7 +236,7 @@ export default function Checkout() {
                 <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
                   <button
                     type="submit"
-                    className="w-full rounded-md border border-transparent bg-indigo-600 px-4 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"
+                    className="w-full rounded-md border border-transparent bg-custom-orange px-4 py-3 text-base font-medium text-white shadow-sm hover:bg-custom-orange-dark focus:outline-none focus:ring-2 focus:ring-custom-orange focus:ring-offset-2 focus:ring-offset-gray-50"
                   >
                     Confirm order
                   </button>
