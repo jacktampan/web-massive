@@ -28,8 +28,8 @@ function Login() {
   };
 
   return (
-    <div className="flex items-center justify-center">
-      <div className="p-8 rounded border-solid border w-full max-w-sm">
+    <div className="flex items-center justify-center min-h-screen bg-custom-color1">
+      <div className="p-8 rounded border-solid border w-full max-w-sm bg-white">
         <div className="text-center mb-6">
           <img
             src={logo}

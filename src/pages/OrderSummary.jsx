@@ -26,7 +26,7 @@ export default function OrderSummary() {
 
   return (
     <div className="bg-white">
-      <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
+      <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8 shadow mt-8">
         <div className="max-w-xl">
           <h1 className="text-base font-medium text-indigo-600">Thank you!</h1>
           <p className="mt-2 text-4xl font-bold tracking-tight sm:text-5xl">
@@ -34,6 +34,13 @@ export default function OrderSummary() {
           </p>
           <p className="mt-2 text-base text-gray-500">
             Pesanan kamu akan di proses setelah kami menerima pembayaran.
+          </p>
+          <p className="mt-2 text-base text-gray-500">
+            Untuk informasi lebih lanjut, cek daftar pesanan di{" "}
+            <a href="/profile" className="text-indigo-600 underline">
+              /profile
+            </a>
+            .
           </p>
         </div>
 
@@ -80,13 +87,10 @@ export default function OrderSummary() {
             </dl>
 
             <h3 className="sr-only">Summary</h3>
-
             <dl className="space-y-6 border-t border-gray-200 pt-10 text-sm">
               <div className="flex justify-between">
                 <dt className="font-medium text-gray-900">Total</dt>
-                <dd className="text-gray-900">{`Rp ${(
-                  selectedOption.price + 10000
-                ).toLocaleString()}`}</dd>
+                <dd className="text-gray-900">{`Rp ${selectedOption.price.toLocaleString()}`}</dd>
               </div>
             </dl>
           </div>

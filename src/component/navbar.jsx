@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Logoimg from "../assets/logo.png";
+
+const INACTIVITY_TIMEOUT = 30 * 60 * 1000; // 30 minutes
 
 const Dialog = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
@@ -35,13 +37,13 @@ const Dialog = ({ isOpen, onClose }) => {
             <div className="bg-gray-50 px-4 py-3 justify-center sm:flex sm:flex-row-reverse sm:px-6">
               <a
                 href="/register"
-                className="inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:ml-3 sm:w-auto"
+                className="inline-flex w-full justify-center rounded-md bg-custom-orange px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:ml-3 sm:w-auto"
               >
                 Pencari Kost
               </a>
               <a
                 href="/admin/register"
-                className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
+                className="inline-flex w-full justify-center rounded-md bg-custom-color px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto mt-3"
                 onClick={onClose}
               >
                 Pemilik Kost
@@ -57,6 +59,42 @@ const Dialog = ({ isOpen, onClose }) => {
 const NavBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+
+    const startInactivityTimer = () => {
+      window.inactivityTimeout = setTimeout(() => {
+        localStorage.removeItem("token");
+        setIsLoggedIn(false);
+        alert("You have been logged out due to inactivity.");
+      }, INACTIVITY_TIMEOUT);
+    };
+
+    const resetInactivityTimer = () => {
+      clearTimeout(window.inactivityTimeout);
+      startInactivityTimer();
+    };
+
+    if (token) {
+      setIsLoggedIn(true);
+      startInactivityTimer();
+    }
+
+    window.addEventListener("mousemove", resetInactivityTimer);
+    window.addEventListener("keydown", resetInactivityTimer);
+    window.addEventListener("scroll", resetInactivityTimer);
+    window.addEventListener("click", resetInactivityTimer);
+
+    return () => {
+      clearTimeout(window.inactivityTimeout);
+      window.removeEventListener("mousemove", resetInactivityTimer);
+      window.removeEventListener("keydown", resetInactivityTimer);
+      window.removeEventListener("scroll", resetInactivityTimer);
+      window.removeEventListener("click", resetInactivityTimer);
+    };
+  }, []);
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   const toggleDialog = () => setIsDialogOpen(!isDialogOpen);
@@ -65,7 +103,6 @@ const NavBar = () => {
     { name: "Home", href: "/" },
     { name: "List", href: "/list" },
     { name: "About", href: "/about" },
-    { name: "Masuk/Daftar", href: "#", isButton: true, onClick: toggleDialog },
   ];
 
   return (
@@ -75,7 +112,7 @@ const NavBar = () => {
           <img src={Logoimg} alt="Logo" className="h-12" />
         </a>
         <div className="hidden md:flex items-center space-x-4">
-          {links.slice(0, 3).map((link) => (
+          {links.map((link) => (
             <a
               key={link.name}
               href={link.href}
@@ -84,12 +121,21 @@ const NavBar = () => {
               {link.name}
             </a>
           ))}
-          <button
-            onClick={toggleDialog}
-            className="py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-600"
-          >
-            Masuk/Daftar
-          </button>
+          {isLoggedIn ? (
+            <a
+              href="/profile"
+              className="py-2 px-4 bg-custom-orange text-white rounded hover:bg-orange-600"
+            >
+              Profile
+            </a>
+          ) : (
+            <button
+              onClick={toggleDialog}
+              className="py-2 px-4 bg-custom-orange text-white rounded hover:bg-orange-600"
+            >
+              Masuk/Daftar
+            </button>
+          )}
         </div>
         <div className="md:hidden flex items-center">
           <button
@@ -122,7 +168,7 @@ const NavBar = () => {
           isMenuOpen ? "flex" : "hidden"
         } flex-col items-center`}
       >
-        {links.slice(0, 3).map((link) => (
+        {links.map((link) => (
           <a
             key={link.name}
             href={link.href}
@@ -131,12 +177,21 @@ const NavBar = () => {
             {link.name}
           </a>
         ))}
-        <button
-          onClick={toggleDialog}
-          className="block py-2 px-4 text-sm bg-blue-500 text-white rounded hover:bg-blue-600"
-        >
-          Masuk/Daftar
-        </button>
+        {isLoggedIn ? (
+          <a
+            href="/profile"
+            className="block py-2 px-4 text-sm bg-custom-orange text-white rounded hover:bg-orange-600"
+          >
+            Profile
+          </a>
+        ) : (
+          <button
+            onClick={toggleDialog}
+            className="block py-2 px-4 text-sm bg-custom-orange text-white rounded hover:bg-orange-600"
+          >
+            Masuk/Daftar
+          </button>
+        )}
       </div>
       <Dialog isOpen={isDialogOpen} onClose={toggleDialog} />
     </nav>

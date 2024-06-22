@@ -20,7 +20,7 @@ const AdminRegister = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://23.26.138.128:3000/api/auth/register/admin",
+        "http://104.234.231.224:3000/api/auth/register/admin",
         formData
       );
       alert("Admin registered successfully");

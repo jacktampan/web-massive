@@ -101,7 +101,7 @@ export default function Checkout() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mx-auto">
           <form onSubmit={handleConfirmOrder}>
-            <div className="bg-white shadow sm:rounded-lg">
+            <div className="bg-white shadow sm:rounded-lg mb-4">
               <div className="px-4 py-5 sm:p-6">
                 <h3 className="text-lg leading-6 font-medium text-gray-900">
                   Pilih Durasi Sewa

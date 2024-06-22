@@ -1,3 +1,4 @@
+import React from "react";
 import {
   FolderIcon,
   HomeIcon,
@@ -19,6 +20,12 @@ const navigation = [
     icon: FolderIcon,
     current: false,
   },
+  {
+    name: "Track",
+    href: "/dashboard/track",
+    icon: FolderIcon,
+    current: false,
+  },
 ];
 
 function classNames(...classes) {
@@ -26,6 +33,12 @@ function classNames(...classes) {
 }
 
 export default function Sidebar() {
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    alert("Logged out!");
+    window.location.href = "/admin/login"; // Redirect to login page
+  };
+
   return (
     <div className="flex h-full flex-col gap-y-5 overflow-y-auto border-r border-gray-200 bg-white px-6">
       <div className="flex h-16 shrink-0 items-center">
@@ -56,18 +69,33 @@ export default function Sidebar() {
                       aria-hidden="true"
                     />
                     {item.name}
-                    {item.count ? (
-                      <span
-                        className="ml-auto w-9 min-w-max whitespace-nowrap rounded-full bg-white px-2.5 py-0.5 text-center text-xs font-medium leading-5 text-gray-600 ring-1 ring-inset ring-gray-200"
-                        aria-hidden="true"
-                      >
-                        {item.count}
-                      </span>
-                    ) : null}
                   </a>
                 </li>
               ))}
             </ul>
+          </li>
+          <li className="mt-auto">
+            <button
+              onClick={handleLogout}
+              className="group flex w-full gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-700 hover:bg-gray-50 hover:text-indigo-600"
+            >
+              <svg
+                className="h-6 w-6 shrink-0 text-gray-400 group-hover:text-indigo-600"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M15 12H3m0 0l4-4m-4 4l4 4m10-4v6m0-6V6m0 6h6"
+                />
+              </svg>
+              Logout
+            </button>
           </li>
         </ul>
       </nav>

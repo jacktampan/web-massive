@@ -17,6 +17,7 @@ import Confirmation from "./pages/Confirmation";
 import Dashboard from "./dashboard/Dashboard";
 import ListProduct from "./dashboard/ListProduct";
 import HomeDashboard from "./dashboard/Home";
+import TrackOrder from "./dashboard/TrackOrder";
 import { AuthProvider } from "./AuthContext";
 
 function App() {
@@ -40,6 +41,7 @@ function App() {
           <Route path="/dashboard/list" element={<ListProduct />} />
           <Route path="/confirmation" element={<Confirmation />} />
           <Route path="/dashboard" element={<HomeDashboard />} />
+          <Route path="/dashboard/track" element={<TrackOrder />} />
         </Routes>
       </BrowserRouter>
     </AuthProvider>

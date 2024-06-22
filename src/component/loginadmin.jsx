@@ -10,7 +10,7 @@ function AdminLogin() {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://23.26.138.128:3000/api/auth/login",
+        "http://104.234.231.224:3000/api/auth/login",
         {
           username,
           password,

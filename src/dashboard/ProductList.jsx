@@ -17,7 +17,7 @@ const ProductList = () => {
     setLoading(true);
     try {
       const response = await axios.get(
-        "http://23.26.138.128:3000/api/products"
+        "http://104.234.231.224:3000/api/products"
       );
       const parsedProducts = response.data.map((product) => ({
         ...product,
@@ -46,7 +46,7 @@ const ProductList = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://23.26.138.128:3000/api/products/${id}`);
+      await axios.delete(`http://104.234.231.224:3000/api/products/${id}`);
       fetchProducts();
     } catch (error) {
       console.error("There was an error deleting the product!", error);
@@ -58,7 +58,7 @@ const ProductList = () => {
     setLoading(true);
     try {
       await axios.put(
-        `http://23.26.138.128:3000/api/products/${editingProduct.id}`,
+        `http://104.234.231.224:3000/api/products/${editingProduct.id}`,
         editingProduct
       );
       setEditingProduct(null);

@@ -1,13 +1,15 @@
 import NavBar from "../component/navbar";
-import Profile from "../component/profile";
-import Footer from "../component/footer";
+import EditProfile from "../component/user/EditProfile";
+import MyOrders from "../component/user/MyOrders";
 
 const UserProfile = () => {
   return (
     <>
       <NavBar />
-      <Profile />
-      <Footer />
+      <EditProfile />
+      <div className="mt-4 mb-4">
+        <MyOrders />
+      </div>
     </>
   );
 };

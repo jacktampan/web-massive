@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import profilePic from "../assets/profile.png";
-
-const AccountSettings = () => {
+import profilePic from "../../assets/profile.png";
+const EditProfile = () => {
   const [profile, setProfile] = useState(null);
-  const [orders, setOrders] = useState([]);
   const [formData, setFormData] = useState({
     username: "",
     email: "",
@@ -28,18 +26,8 @@ const AccountSettings = () => {
           username: profileData.username,
           email: profileData.email,
         });
-
-        const ordersResponse = await axios.get(
-          "http://104.234.231.224:3000/api/orders",
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-        setOrders(ordersResponse.data);
       } catch (error) {
-        console.error("Error fetching data:", error);
+        console.error("Error fetching profile data:", error);
       }
     };
 
@@ -84,7 +72,7 @@ const AccountSettings = () => {
   }
 
   return (
-    <div className="account-settings p-8 bg-white shadow-md rounded-lg max-w-2xl mx-auto">
+    <div className="edit-profile p-8 bg-white solid border rounded-lg max-w-2xl mx-auto">
       <div className="profile-information text-center mb-8">
         <img
           src={profilePic}
@@ -139,36 +127,8 @@ const AccountSettings = () => {
           </div>
         </form>
       </div>
-
-      <div className="orders mb-8">
-        <h3 className="form-heading text-lg font-semibold mb-4">My Orders</h3>
-        {orders.length > 0 ? (
-          <ul>
-            {orders.map((order) => (
-              <li key={order.id} className="border-b border-gray-300 py-4">
-                <div>
-                  <span className="font-semibold">Kost ID:</span> {order.kostId}
-                </div>
-                <div>
-                  <span className="font-semibold">Duration:</span>{" "}
-                  {order.duration}
-                </div>
-                <div>
-                  <span className="font-semibold">Total Price:</span> Rp{" "}
-                  {order.totalPrice.toLocaleString()}
-                </div>
-                <div>
-                  <span className="font-semibold">Status:</span> {order.status}
-                </div>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p>No orders found.</p>
-        )}
-      </div>
     </div>
   );
 };
 
-export default AccountSettings;
+export default EditProfile;

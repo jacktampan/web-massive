@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"; // gunakan useNavigate
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import logo from "../assets/logo.png";
 
@@ -10,7 +10,7 @@ const Register = () => {
     password: "",
   });
 
-  const navigate = useNavigate(); // inisialisasi useNavigate
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({
@@ -23,11 +23,11 @@ const Register = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://23.26.138.128:3000/api/auth/register/user",
+        "http://104.234.231.224:3000/api/auth/register/user",
         formData
       );
       alert("User registered successfully");
-      navigate("/login"); // redirect ke halaman login
+      navigate("/login");
     } catch (error) {
       console.error("There was an error registering the user!", error);
       alert("Failed to register user");
@@ -35,7 +35,7 @@ const Register = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-white">
+    <div className="flex items-center justify-center min-h-screen bg-custom-color1">
       <div className="bg-white p-8 rounded shadow-lg w-full max-w-sm">
         <div className="text-center mb-6">
           <img
@@ -103,6 +103,14 @@ const Register = () => {
             Register
           </button>
         </form>
+        <div className="text-center mt-4">
+          <p className="text-gray-600">
+            Already have an account?{" "}
+            <a href="/login" className="text-orange-500 hover:underline">
+              Login
+            </a>
+          </p>
+        </div>
       </div>
     </div>
   );

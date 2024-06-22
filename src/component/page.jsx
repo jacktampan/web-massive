@@ -11,7 +11,7 @@ const Page = () => {
   const { isLoggedIn } = useAuth();
   const [product, setProduct] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalImageSrc, setModalImageSrc] = useState("");
+  const [modalContent, setModalContent] = useState(null);
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -63,12 +63,28 @@ const Page = () => {
   }, [id]);
 
   const handleImageClick = (src) => {
-    setModalImageSrc(src);
+    setModalContent(
+      <div className="text-center p-6">
+        <img src={src} alt="Product Image" className="mx-auto" />
+      </div>
+    );
     setIsModalOpen(true);
   };
 
   const handleRentNowClick = () => {
     if (!isLoggedIn) {
+      setModalContent(
+        <div className="text-center p-6">
+          <h2 className="text-2xl font-bold mb-4">Please Login</h2>
+          <p className="mb-4">You need to login to rent this product.</p>
+          <button
+            onClick={() => navigate("/login")}
+            className="w-full bg-indigo-600 text-white py-2 rounded hover:bg-indigo-700 transition duration-200"
+          >
+            Login
+          </button>
+        </div>
+      );
       setIsModalOpen(true);
     } else {
       navigate(`/checkout`, { state: { product } });
@@ -164,18 +180,9 @@ const Page = () => {
         <Modal
           isOpen={isModalOpen}
           onClose={() => setIsModalOpen(false)}
-          contentLabel="Please Login"
+          contentLabel="Modal"
         >
-          <div className="text-center p-6">
-            <h2 className="text-2xl font-bold mb-4">Please Login</h2>
-            <p className="mb-4">You need to login to rent this product.</p>
-            <button
-              onClick={() => navigate("/login")}
-              className="w-full bg-indigo-600 text-white py-2 rounded hover:bg-indigo-700 transition duration-200"
-            >
-              Login
-            </button>
-          </div>
+          {modalContent}
         </Modal>
       )}
     </div>
