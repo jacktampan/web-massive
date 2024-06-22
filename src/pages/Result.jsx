@@ -1,33 +1,41 @@
-import React from "react";
-import { useLocation } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 
-function SearchResults() {
+export default function List() {
   const location = useLocation();
-  const results = location.state?.results || [];
+  const { results } = location.state || { results: [] };
 
   return (
-    <div className="container mx-auto p-4">
-      <section className="mt-4">
-        {results.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {results.map((result) => (
-              <div key={result.id} className="bg-white p-4 rounded shadow">
-                <h3 className="text-xl font-bold">{result.namaKost}</h3>
-                <p>{result.alamat}</p>
-                <p>
-                  {result.kota}, {result.provinsi}
-                </p>
-                <p>{result.hargaPerBulan} per bulan</p>
-                {/* Add more details as needed */}
+    <div className="bg-white">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <h2 className="my-4 text-xl">Daftar Kost yang Anda Cari</h2>
+        <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 lg:gap-x-8">
+          {results.map((product) => (
+            <Link
+              key={product.id}
+              to={`/page/${product.id}`}
+              className="group text-sm"
+            >
+              <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-100 group-hover:opacity-75">
+                <img
+                  src={`http://104.234.231.224:3000/${product.fotoKost}`}
+                  alt={product.namaKost}
+                  className="w-96 h-80 object-cover object-center"
+                />
               </div>
-            ))}
-          </div>
-        ) : (
-          <p className="text-center text-gray-500">No results found</p>
-        )}
-      </section>
+              <h3 className="mt-4 font-medium text-gray-900">
+                {product.namaKost}
+              </h3>
+              <p className="mt-1 text-sm text-gray-500">
+                {product.alamat}, {product.kota}, {product.provinsi}
+              </p>
+              <p className="mt-2 font-medium text-gray-900">
+                Rp {product.hargaPerBulan}
+              </p>
+            </Link>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
-
-export default SearchResults;

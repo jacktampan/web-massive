@@ -19,6 +19,8 @@ import ListProduct from "./dashboard/ListProduct";
 import HomeDashboard from "./dashboard/Home";
 import TrackOrder from "./dashboard/TrackOrder";
 import { AuthProvider } from "./AuthContext";
+import SearchForm from "./component/search";
+import SearchResults from "./pages/Result";
 
 function App() {
   return (
@@ -42,6 +44,8 @@ function App() {
           <Route path="/confirmation" element={<Confirmation />} />
           <Route path="/dashboard" element={<HomeDashboard />} />
           <Route path="/dashboard/track" element={<TrackOrder />} />
+          <Route path="/search" element={<SearchForm />} />
+          <Route path="/search-results" element={<SearchResults />} />
         </Routes>
       </BrowserRouter>
     </AuthProvider>

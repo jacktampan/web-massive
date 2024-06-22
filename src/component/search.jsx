@@ -1,24 +1,48 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function SearchForm() {
-  const [location, setLocation] = useState("");
-  const [fasilitas, setFasilitas] = useState("");
-  const [harga, setHarga] = useState("");
+  const [kota, setKota] = useState("");
+  const [kategoriKost, setKategoriKost] = useState("");
+  const [hargaMin, setHargaMin] = useState("");
+  const [hargaMax, setHargaMax] = useState("");
+  const [suggestions, setSuggestions] = useState({
+    kota: [],
+    kategoriKost: [],
+    harga: [],
+  });
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchSuggestions = async () => {
+      try {
+        const response = await axios.get(
+          "http://104.234.231.224:3000/api/suggestions"
+        );
+        setSuggestions(response.data);
+      } catch (error) {
+        console.error("Error fetching suggestions:", error);
+      }
+    };
+
+    fetchSuggestions();
+  }, []);
 
   const handleSearch = async () => {
     try {
-      const response = await axios.get("/api/search", {
-        params: {
-          location,
-          fasilitas,
-          harga,
-        },
-      });
+      const response = await axios.get(
+        "http://104.234.231.224:3000/api/search",
+        {
+          params: {
+            kota,
+            kategoriKost,
+            hargaMin,
+            hargaMax,
+          },
+        }
+      );
 
-      // Pastikan respons data adalah array
       if (Array.isArray(response.data)) {
         navigate("/search-results", { state: { results: response.data } });
       } else {
@@ -26,7 +50,7 @@ function SearchForm() {
       }
     } catch (error) {
       console.error("Error fetching search results:", error);
-      navigate("/search-results", { state: { results: [] } }); // Set results to an empty array in case of error
+      navigate("/search-results", { state: { results: [] } });
     }
   };
 
@@ -34,50 +58,62 @@ function SearchForm() {
     <div className="container mx-auto p-4">
       <section className="bg-gray-100 dark:bg-zinc-800 flex justify-center p-4">
         <form
-          className="flex flex-col md:flex-row justify-center items-center gap-4 w-full max-w-3xl"
+          className="flex flex-col md:flex-row justify-center items-center gap-4 w-full max-w-5xl"
           onSubmit={(e) => {
             e.preventDefault();
             handleSearch();
           }}
         >
-          <div className="w-full md:w-1/4">
-            <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="location"
-              type="text"
-              placeholder="Lokasi"
-              value={location}
-              onChange={(e) => setLocation(e.target.value)}
-            />
-          </div>
-          <div className="w-full md:w-1/4">
-            <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="fasilitas"
-              type="text"
-              placeholder="Fasilitas"
-              value={fasilitas}
-              onChange={(e) => setFasilitas(e.target.value)}
-            />
-          </div>
-          <div className="w-full md:w-1/4">
-            <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="harga"
-              type="text"
-              placeholder="Harga"
-              value={harga}
-              onChange={(e) => setHarga(e.target.value)}
-            />
-          </div>
-          <div className="w-full md:w-1/4">
-            <button
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
-              type="submit"
-            >
-              Search
-            </button>
-          </div>
+          <select
+            className="py-2 px-4 border rounded-full text-gray-700 focus:outline-none focus:shadow-outline"
+            value={kota}
+            onChange={(e) => setKota(e.target.value)}
+          >
+            <option value="">Kota</option>
+            {(suggestions.kota || []).map((kota, index) => (
+              <option key={index} value={kota}>
+                {kota}
+              </option>
+            ))}
+          </select>
+
+          <select
+            className="py-2 px-4 border rounded-full text-gray-700 focus:outline-none focus:shadow-outline"
+            value={kategoriKost}
+            onChange={(e) => setKategoriKost(e.target.value)}
+          >
+            <option value="">Kategori</option>
+            {(suggestions.kategoriKost || []).map((kategori, index) => (
+              <option key={index} value={kategori}>
+                {kategori}
+              </option>
+            ))}
+          </select>
+
+          <input
+            className="py-2 px-4 border rounded-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="hargaMin"
+            type="number"
+            placeholder="Harga Min"
+            value={hargaMin}
+            onChange={(e) => setHargaMin(e.target.value)}
+          />
+
+          <input
+            className="py-2 px-4 border rounded-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="hargaMax"
+            type="number"
+            placeholder="Harga Max"
+            value={hargaMax}
+            onChange={(e) => setHargaMax(e.target.value)}
+          />
+
+          <button
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full focus:outline-none focus:shadow-outline"
+            type="submit"
+          >
+            Search
+          </button>
         </form>
       </section>
     </div>

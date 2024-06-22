@@ -14,8 +14,8 @@ import logo from "../assets/logo.png";
 // Main component
 const FooterComponent = () => {
   return (
-    <div className="bg-gray-600 text-white mt-8 p-4">
-      <div className="max-w-7xl mx-auto flex flex-col lg:flex-row justify-between items-start space-y-4 lg:space-x-8 lg:space-y-0">
+    <div className="bg-custom-footer text-white mt-8 p-4">
+      <div className="mx-auto max-w-5xl flex flex-col lg:flex-row justify-between items-start space-y-4 lg:space-x-8 lg:space-y-0">
         <ContactAndPayment />
         <HeroImage />
         <FollowUs />
