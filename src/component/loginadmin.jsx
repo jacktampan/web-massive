@@ -28,15 +28,15 @@ function AdminLogin() {
   };
 
   return (
-    <div className="flex items-center justify-center">
-      <div className="p-8 rounded border-solid border w-full max-w-sm">
+    <div className="flex items-center justify-center min-h-screen bg-custom-color1">
+      <div className="p-8 rounded border-solid border w-full max-w-sm bg-white">
         <div className="text-center mb-6">
           <img
             src={logo}
             alt="KostCozy Logo"
             className="h-32 w-32 mx-auto mb-4"
           />
-          <h2 className="text-2xl font-semibold text-orange-500">
+          <h2 className="text-2xl font-semibold text-custom-orange">
             Admin Login
           </h2>
           <p className="text-gray-600">
@@ -53,7 +53,7 @@ function AdminLogin() {
               id="username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              className="w-full px-3 py-2 border rounded focus:outline-none focus:border-orange-500"
+              className="w-full px-3 py-2 border rounded focus:outline-none focus:border-custom-orange"
               placeholder="Username"
               required
             />
@@ -67,14 +67,14 @@ function AdminLogin() {
               id="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-3 py-2 border rounded focus:outline-none focus:border-orange-500"
+              className="w-full px-3 py-2 border rounded focus:outline-none focus:border-custom-orange"
               placeholder="Password"
               required
             />
           </div>
           <button
             type="submit"
-            className="w-full bg-orange-500 text-white py-2 rounded hover:bg-orange-600 transition duration-200"
+            className="w-full bg-custom-orange text-white py-2 rounded hover:bg-orange-600 transition duration-200"
           >
             Sign In
           </button>
@@ -84,7 +84,7 @@ function AdminLogin() {
             Don't have an account?{" "}
             <a
               href="/admin/register"
-              className="text-orange-500 hover:underline"
+              className="text-custom-orange hover:underline"
             >
               Sign Up
             </a>

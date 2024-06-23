@@ -36,7 +36,7 @@ function Login() {
             alt="KostCozy Logo"
             className="h-32 w-32 mx-auto mb-4"
           />
-          <h2 className="text-2xl font-semibold text-orange-500">
+          <h2 className="text-2xl font-semibold text-custom-orange">
             Welcome to KostCozy
           </h2>
           <p className="text-gray-600">
@@ -46,35 +46,35 @@ function Login() {
         <form onSubmit={handleLogin}>
           <div className="mb-4">
             <label className="block text-gray-700 mb-2" htmlFor="username">
-              Masukkan username anda
+              Your username
             </label>
             <input
               type="text"
               id="username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              className="w-full px-3 py-2 border rounded focus:outline-none focus:border-orange-500"
+              className="w-full px-3 py-2 border rounded focus:outline-none focus:border-custom-orange"
               placeholder="Username"
               required
             />
           </div>
           <div className="mb-4">
             <label className="block text-gray-700 mb-2" htmlFor="password">
-              Masukkan password anda
+              Your password
             </label>
             <input
               type="password"
               id="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-3 py-2 border rounded focus:outline-none focus:border-orange-500"
+              className="w-full px-3 py-2 border rounded focus:outline-none focus:border-custom-orange"
               placeholder="Password"
               required
             />
           </div>
           <button
             type="submit"
-            className="w-full bg-orange-500 text-white py-2 rounded hover:bg-orange-600 transition duration-200"
+            className="w-full bg-custom-orange text-white py-2 rounded hover:bg-orange-600 transition duration-200"
           >
             Sign In
           </button>
@@ -82,7 +82,7 @@ function Login() {
         <div className="text-center p-6">
           <p className="text-gray-600">
             Don't have an account?{" "}
-            <a href="/register" className="text-orange-500 hover:underline">
+            <a href="/register" className="text-custom-orange hover:underline">
               Sign Up
             </a>
           </p>

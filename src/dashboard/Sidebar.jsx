@@ -5,27 +5,13 @@ import {
   DocumentPlusIcon,
 } from "@heroicons/react/24/outline";
 import logo from "../assets/logo.png";
+import { NavLink, useNavigate } from "react-router-dom";
 
-const navigation = [
-  { name: "Dashboard", href: "/dashboard", icon: HomeIcon, current: true },
-  {
-    name: "Add",
-    href: "/dashboard/add",
-    icon: DocumentPlusIcon,
-    current: false,
-  },
-  {
-    name: "List",
-    href: "/dashboard/list",
-    icon: FolderIcon,
-    current: false,
-  },
-  {
-    name: "Track",
-    href: "/dashboard/track",
-    icon: FolderIcon,
-    current: false,
-  },
+const navigationItems = [
+  { name: "Dashboard", href: "/dashboard", icon: HomeIcon },
+  { name: "Add", href: "/dashboard/add", icon: DocumentPlusIcon },
+  { name: "List", href: "/dashboard/list", icon: FolderIcon },
+  { name: "Track", href: "/dashboard/track", icon: FolderIcon },
 ];
 
 function classNames(...classes) {
@@ -33,14 +19,16 @@ function classNames(...classes) {
 }
 
 export default function Sidebar() {
+  const navigate = useNavigate();
+
   const handleLogout = () => {
     localStorage.removeItem("token");
     alert("Logged out!");
-    window.location.href = "/admin/login"; // Redirect to login page
+    navigate("/admin/login");
   };
 
   return (
-    <div className="flex h-full flex-col gap-y-5 overflow-y-auto border-r border-gray-200 bg-white px-6">
+    <div className="fixed inset-y-0 left-0 w-64 flex flex-col gap-y-5 overflow-y-auto border-r border-gray-200 bg-white px-6">
       <div className="flex h-16 shrink-0 items-center">
         <img className="h-8 w-auto" src={logo} alt="Kost Cozy" />
       </div>
@@ -48,20 +36,27 @@ export default function Sidebar() {
         <ul role="list" className="flex flex-1 flex-col gap-y-7">
           <li>
             <ul role="list" className="-mx-2 space-y-1">
-              {navigation.map((item) => (
+              {navigationItems.map((item) => (
                 <li key={item.name}>
-                  <a
-                    href={item.href}
-                    className={classNames(
-                      item.current
-                        ? "bg-gray-50 text-indigo-600"
-                        : "text-gray-700 hover:text-indigo-600 hover:bg-gray-50",
-                      "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
-                    )}
+                  <NavLink
+                    to={item.href}
+                    className={({ isActive }) =>
+                      classNames(
+                        isActive
+                          ? "bg-gray-50 text-indigo-600"
+                          : "text-gray-700 hover:text-indigo-600 hover:bg-gray-50",
+                        "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
+                      )
+                    }
+                    aria-current={
+                      item.href === window.location.pathname
+                        ? "page"
+                        : undefined
+                    }
                   >
                     <item.icon
                       className={classNames(
-                        item.current
+                        item.href === window.location.pathname
                           ? "text-indigo-600"
                           : "text-gray-400 group-hover:text-indigo-600",
                         "h-6 w-6 shrink-0"
@@ -69,7 +64,7 @@ export default function Sidebar() {
                       aria-hidden="true"
                     />
                     {item.name}
-                  </a>
+                  </NavLink>
                 </li>
               ))}
             </ul>

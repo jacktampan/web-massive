@@ -43,7 +43,7 @@ const Register = () => {
             alt="KostCozy Logo"
             className="h-32 w-32 mx-auto mb-4"
           />
-          <h2 className="text-2xl font-semibold text-orange-500">
+          <h2 className="text-2xl font-semibold text-custom-orange">
             Register at KostCozy
           </h2>
           <p className="text-gray-600">
@@ -61,7 +61,7 @@ const Register = () => {
               name="username"
               value={formData.username}
               onChange={handleChange}
-              className="w-full px-3 py-2 border rounded focus:outline-none focus:border-orange-500"
+              className="w-full px-3 py-2 border rounded focus:outline-none focus:border-custom-orange"
               placeholder="Username"
               required
             />
@@ -76,7 +76,7 @@ const Register = () => {
               name="email"
               value={formData.email}
               onChange={handleChange}
-              className="w-full px-3 py-2 border rounded focus:outline-none focus:border-orange-500"
+              className="w-full px-3 py-2 border rounded focus:outline-none focus:border-custom-orange"
               placeholder="Email"
               required
             />
@@ -91,14 +91,14 @@ const Register = () => {
               name="password"
               value={formData.password}
               onChange={handleChange}
-              className="w-full px-3 py-2 border rounded focus:outline-none focus:border-orange-500"
+              className="w-full px-3 py-2 border rounded focus:outline-none focus:border-custom-orange"
               placeholder="Password"
               required
             />
           </div>
           <button
             type="submit"
-            className="w-full bg-orange-500 text-white py-2 rounded hover:bg-orange-600 transition duration-200"
+            className="w-full bg-custom-orange text-white py-2 rounded hover:bg-orange-600 transition duration-200"
           >
             Register
           </button>
@@ -106,7 +106,7 @@ const Register = () => {
         <div className="text-center mt-4">
           <p className="text-gray-600">
             Already have an account?{" "}
-            <a href="/login" className="text-orange-500 hover:underline">
+            <a href="/login" className="text-custom-orange hover:underline">
               Login
             </a>
           </p>

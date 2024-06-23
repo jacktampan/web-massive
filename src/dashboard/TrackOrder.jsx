@@ -3,16 +3,12 @@ import Sidebar from "./Sidebar";
 
 const Dashboard = () => {
   return (
-    <>
-      <div className="flex h-screen">
-        <div className="w-64">
-          <Sidebar />
-        </div>
-        <div className="flex-1">
-          <Track />
-        </div>
+    <div className="flex h-screen">
+      <Sidebar />
+      <div className="flex-1 ml-64 p-6 overflow-y-auto">
+        <Track />
       </div>
-    </>
+    </div>
   );
 };
 

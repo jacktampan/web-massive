@@ -1,42 +1,55 @@
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { StarIcon } from "@heroicons/react/20/solid";
-
-const reviews = [
-  {
-    id: 1,
-    rating: 5,
-    content: `
-      <p>Kost bagus sesuai dengan foto, lingkungan bersih</p>
-    `,
-    date: "July 16, 2021",
-    datetime: "2021-07-16",
-    author: "Emily Selman",
-    avatarSrc:
-      "https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80",
-  },
-  {
-    id: 2,
-    rating: 5,
-    content: `
-      <p>Harga dan kualitas terbaik, ibu kost baik hati dan tidak sombong</p>
-    `,
-    date: "July 12, 2021",
-    datetime: "2021-07-12",
-    author: "Hector Gibbons",
-    avatarSrc:
-      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80",
-  },
-  // More reviews...
-];
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function Example() {
+export default function Example({ productId }) {
+  const [reviews, setReviews] = useState([]);
+  const [rating, setRating] = useState(0);
+  const [comment, setComment] = useState("");
+
+  useEffect(() => {
+    const fetchReviews = async () => {
+      try {
+        const response = await axios.get(
+          `http://104.234.231.224:3000/api/products/${productId}/reviews`
+        );
+        setReviews(response.data);
+      } catch (error) {
+        console.error("Error fetching reviews:", error);
+      }
+    };
+    fetchReviews();
+  }, [productId]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const token = localStorage.getItem("token");
+      const response = await axios.post(
+        `http://104.234.231.224:3000/api/products/${productId}/reviews`,
+        { rating, comment },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setReviews([...reviews, response.data]);
+      setRating(0);
+      setComment("");
+    } catch (error) {
+      console.error("Error adding review:", error);
+    }
+  };
+
   return (
     <div className="bg-white">
       <div>
-        <h2 className="sr-only">Customer Reviews</h2>
+        <h2 className="text-lg font-medium text-gray-900">Customer Reviews</h2>
 
         <div className="-my-10">
           {reviews.map((review, reviewIdx) => (
@@ -86,6 +99,56 @@ export default function Example() {
             </div>
           ))}
         </div>
+
+        <form onSubmit={handleSubmit} className="mt-6">
+          <h3 className="text-lg font-medium text-gray-900">Add a Review</h3>
+          <div className="mt-2">
+            <label
+              htmlFor="rating"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Rating
+            </label>
+            <select
+              id="rating"
+              name="rating"
+              value={rating}
+              onChange={(e) => setRating(e.target.value)}
+              className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+            >
+              <option value={0}>Select a rating</option>
+              <option value={1}>1 star</option>
+              <option value={2}>2 stars</option>
+              <option value={3}>3 stars</option>
+              <option value={4}>4 stars</option>
+              <option value={5}>5 stars</option>
+            </select>
+          </div>
+          <div className="mt-4">
+            <label
+              htmlFor="comment"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Comment
+            </label>
+            <textarea
+              id="comment"
+              name="comment"
+              rows="4"
+              value={comment}
+              onChange={(e) => setComment(e.target.value)}
+              className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+            ></textarea>
+          </div>
+          <div className="mt-4">
+            <button
+              type="submit"
+              className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            >
+              Submit Review
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   );

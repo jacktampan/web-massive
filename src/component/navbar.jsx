@@ -131,7 +131,7 @@ const NavBar = () => {
           ) : (
             <button
               onClick={toggleDialog}
-              className="py-2 px-4 bg-custom-orange text-white rounded hover:bg-orange-600"
+              className="py-2 px-4 bg-custom-color text-white rounded hover:bg-orange-600"
             >
               Masuk/Daftar
             </button>
