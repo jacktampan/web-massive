@@ -15,7 +15,7 @@ export default function Example({ productId }) {
     const fetchReviews = async () => {
       try {
         const response = await axios.get(
-          `http://104.234.231.224:3000/api/products/${productId}/reviews`
+          `https://hanabira.co/api/products/${productId}/reviews`
         );
         setReviews(response.data);
       } catch (error) {
@@ -30,7 +30,7 @@ export default function Example({ productId }) {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.post(
-        `http://104.234.231.224:3000/api/products/${productId}/reviews`,
+        `https://hanabira.co/api/products/${productId}/reviews`,
         { rating, comment },
         {
           headers: {

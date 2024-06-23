@@ -15,7 +15,7 @@ const MyOrders = () => {
       try {
         const token = localStorage.getItem("token");
         const ordersResponse = await axios.get(
-          "http://104.234.231.224:3000/api/orders",
+          "https://hanabira.co/api/orders",
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -51,7 +51,7 @@ const MyOrders = () => {
     try {
       const token = localStorage.getItem("token");
       await axios.post(
-        `http://104.234.231.224:3000/api/orders/${orderId}/upload-proof`,
+        `https://hanabira.co/api/orders/${orderId}/upload-proof`,
         formData,
         {
           headers: {
@@ -79,7 +79,7 @@ const MyOrders = () => {
     try {
       const token = localStorage.getItem("token");
       await axios.post(
-        `http://104.234.231.224:3000/api/products/${productId}/reviews`,
+        `https://hanabira.co/api/products/${productId}/reviews`,
         { rating, comment },
         {
           headers: {

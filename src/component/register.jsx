@@ -23,7 +23,7 @@ const Register = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://104.234.231.224:3000/api/auth/register/user",
+        "https://hanabira.co/api/auth/register/user",
         formData
       );
       alert("User registered successfully");

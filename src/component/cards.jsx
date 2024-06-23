@@ -15,9 +15,7 @@ const Cards = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get(
-          "http://104.234.231.224:3000/api/products"
-        );
+        const response = await axios.get("https://hanabira.co/api/products");
         const data = response.data.map((product) => ({
           id: product.id,
           namaKost: product.namaKost,

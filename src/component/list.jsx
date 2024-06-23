@@ -5,7 +5,7 @@ export default function List() {
   const [productsKost, setProductsKost] = useState([]);
 
   useEffect(() => {
-    fetch("http://104.234.231.224:3000/api/products")
+    fetch("https://hanabira.co/api/products")
       .then((response) => response.json())
       .then((data) => {
         const formattedData = data.map((product) => ({
@@ -14,7 +14,7 @@ export default function List() {
           href: `/page/${product.id}`, // Update href to navigate to the Page component with the product ID
           price: `Rp ${product.hargaPerBulan}`,
           availability: `${product.alamat}, ${product.kota}, ${product.provinsi}`,
-          imageSrc: `http://104.234.231.224:3000/${product.fotoKost}`,
+          imageSrc: `https://hanabira.co/${product.fotoKost}`,
           imageAlt: product.namaKost,
         }));
         setProductsKost(formattedData);

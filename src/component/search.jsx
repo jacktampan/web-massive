@@ -17,9 +17,7 @@ function SearchForm() {
   useEffect(() => {
     const fetchSuggestions = async () => {
       try {
-        const response = await axios.get(
-          "http://104.234.231.224:3000/api/suggestions"
-        );
+        const response = await axios.get("https://hanabira.co/api/suggestions");
         setSuggestions(response.data);
       } catch (error) {
         console.error("Error fetching suggestions:", error);
@@ -31,17 +29,14 @@ function SearchForm() {
 
   const handleSearch = async () => {
     try {
-      const response = await axios.get(
-        "http://104.234.231.224:3000/api/search",
-        {
-          params: {
-            kota,
-            kategoriKost,
-            hargaMin,
-            hargaMax,
-          },
-        }
-      );
+      const response = await axios.get("https://hanabira.co/api/search", {
+        params: {
+          kota,
+          kategoriKost,
+          hargaMin,
+          hargaMax,
+        },
+      });
 
       if (Array.isArray(response.data)) {
         navigate("/search-results", { state: { results: response.data } });

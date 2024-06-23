@@ -15,7 +15,7 @@ const ProductCard = ({ product }) => {
       onClick={handleCardClick}
     >
       <img
-        src={`http://104.234.231.224:3000/${product.fotoKost}`}
+        src={`https://hanabira.co/${product.fotoKost}`}
         alt={`Image of ${product.namaKost}`}
         className="w-full h-48 object-cover"
         onError={(e) =>

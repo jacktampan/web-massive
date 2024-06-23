@@ -16,9 +16,7 @@ const ProductList = () => {
   const fetchProducts = async () => {
     setLoading(true);
     try {
-      const response = await axios.get(
-        "http://104.234.231.224:3000/api/products"
-      );
+      const response = await axios.get("https://hanabira.co/api/products");
       const parsedProducts = response.data.map((product) => ({
         ...product,
         fasilitasKamar: Array.isArray(product.fasilitasKamar)
@@ -46,7 +44,7 @@ const ProductList = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://104.234.231.224:3000/api/products/${id}`);
+      await axios.delete(`https://hanabira.co/api/products/${id}`);
       fetchProducts();
     } catch (error) {
       console.error("There was an error deleting the product!", error);
@@ -58,7 +56,7 @@ const ProductList = () => {
     setLoading(true);
     try {
       await axios.put(
-        `http://104.234.231.224:3000/api/products/${editingProduct.id}`,
+        `https://hanabira.co/api/products/${editingProduct.id}`,
         editingProduct
       );
       setEditingProduct(null);

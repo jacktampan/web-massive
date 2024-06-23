@@ -17,7 +17,7 @@ const Page = () => {
     const fetchProduct = async () => {
       try {
         const response = await axios.get(
-          `http://104.234.231.224:3000/api/products/${id}`
+          `https://hanabira.co/api/products/${id}`
         );
         const product = response.data;
         setProduct({
@@ -28,19 +28,19 @@ const Page = () => {
             {
               id: 1,
               name: product.namaKost,
-              src: `http://104.234.231.224:3000/${product.fotoKost}`,
+              src: `https://hanabira.co/${product.fotoKost}`,
               alt: product.namaKost,
             },
             {
               id: 2,
               name: "Luar Kamar",
-              src: `http://104.234.231.224:3000/${product.fotoLuarKamar}`,
+              src: `https://hanabira.co/${product.fotoLuarKamar}`,
               alt: "Luar Kamar",
             },
             {
               id: 3,
               name: "Dalam Kamar",
-              src: `http://104.234.231.224:3000/${product.fotoDalamKamar}`,
+              src: `https://hanabira.co/${product.fotoDalamKamar}`,
               alt: "Dalam Kamar",
             },
           ],

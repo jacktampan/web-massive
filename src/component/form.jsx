@@ -22,7 +22,7 @@ export default function Checkout() {
       const fetchOptions = async () => {
         try {
           const response = await axios.get(
-            `http://104.234.231.224:3000/api/products/${product.id}`
+            `https://hanabira.co/api/products/${product.id}`
           );
           const data = response.data;
           setOptions([
@@ -66,7 +66,7 @@ export default function Checkout() {
     try {
       const token = localStorage.getItem("token"); // Assuming the JWT token is stored in localStorage
       const response = await axios.post(
-        "http://104.234.231.224:3000/api/orders",
+        "https://hanabira.co/api/orders",
         {
           kostId: product.id,
           duration: selectedMethod,

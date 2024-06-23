@@ -13,7 +13,7 @@ const EditProfile = () => {
       try {
         const token = localStorage.getItem("token");
         const profileResponse = await axios.get(
-          "http://104.234.231.224:3000/api/users/profile",
+          "https://hanabira.co/api/users/profile",
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -45,16 +45,12 @@ const EditProfile = () => {
     e.preventDefault();
     try {
       const token = localStorage.getItem("token");
-      await axios.put(
-        "http://104.234.231.224:3000/api/users/profile",
-        formData,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      await axios.put("https://hanabira.co/api/users/profile", formData, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
       alert("Profile updated!");
     } catch (error) {
       alert("Failed to save profile");

@@ -9,14 +9,11 @@ function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(
-        "http://104.234.231.224:3000/api/auth/login",
-        {
-          username,
-          password,
-          role: "user",
-        }
-      );
+      const response = await axios.post("https://hanabira.co/api/auth/login", {
+        username,
+        password,
+        role: "user",
+      });
       localStorage.setItem("token", response.data.token);
       alert("Login successful");
       // Redirect to dashboard or any other page

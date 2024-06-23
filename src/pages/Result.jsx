@@ -18,7 +18,7 @@ export default function List() {
             >
               <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-100 group-hover:opacity-75">
                 <img
-                  src={`http://104.234.231.224:3000/${product.fotoKost}`}
+                  src={`https://hanabira.co/${product.fotoKost}`}
                   alt={product.namaKost}
                   className="w-96 h-80 object-cover object-center"
                 />

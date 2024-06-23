@@ -8,14 +8,11 @@ function MainComponent() {
     const fetchOrders = async () => {
       try {
         const token = localStorage.getItem("token");
-        const response = await axios.get(
-          "http://104.234.231.224:3000/api/orders",
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        const response = await axios.get("https://hanabira.co/api/orders", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         console.log("Fetched orders:", response.data);
         setOrders(response.data);
       } catch (error) {
@@ -30,7 +27,7 @@ function MainComponent() {
     try {
       const token = localStorage.getItem("token");
       await axios.put(
-        `http://104.234.231.224:3000/api/orders/${orderId}`,
+        `https://hanabira.co/api/orders/${orderId}`,
         { status: "confirmed" },
         {
           headers: {
@@ -82,7 +79,7 @@ function MainComponent() {
                   <td className="p-4">
                     {order.paymentProof ? (
                       <img
-                        src={`http://104.234.231.224:3000/${order.paymentProof}`}
+                        src={`https://hanabira.co/${order.paymentProof}`}
                         alt="Payment Proof"
                         className="w-32 h-32 object-cover"
                       />

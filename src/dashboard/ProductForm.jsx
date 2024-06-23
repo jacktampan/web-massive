@@ -91,7 +91,7 @@ const ProductForm = () => {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.post(
-        "http://104.234.231.224:3000/api/products",
+        "https://hanabira.co/api/products",
         data,
         {
           headers: {
