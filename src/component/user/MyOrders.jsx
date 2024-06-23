@@ -76,6 +76,8 @@ const MyOrders = () => {
   };
 
   const handleSubmitReview = async (productId) => {
+    console.log("Submitting review for productId:", productId);
+
     try {
       const token = localStorage.getItem("token");
       await axios.post(
