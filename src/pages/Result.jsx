@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import PropTypes from "prop-types";
+import Navbar from "../component/navbar";
 
 const Product = ({ product }) => {
   const {
@@ -188,27 +189,30 @@ const EPGrid12_Qr7J3PqS = () => {
   });
 
   return (
-    <section className="py-14 md:py-24 bg-white dark:bg-[#0b1727] text-zinc-900 dark:text-white relative overflow-hidden z-10">
-      <div className="container relative px-4 mx-auto">
-        <div className="flex flex-col md:flex-row gap-6 mt-12">
-          <div className="w-full md:w-1/3 xl:w-1/4">
-            <Sidebar
-              filterFasilitasKamar={fasilitasKamar}
-              filterFasilitasBersama={fasilitasBersama}
-              selectedFilters={selectedFilters}
-              setSelectedFilters={setSelectedFilters}
-            />
-          </div>
-          <div className="w-full md:w-2/3 xl:w-3/4">
-            <div className="grid grid-cols-12 gap-4">
-              {filteredResults.map((product, index) => (
-                <Product key={index} product={product} />
-              ))}
+    <div>
+      <Navbar />
+      <section className="py-14 md:py-24 bg-white dark:bg-[#0b1727] text-zinc-900 dark:text-white relative overflow-hidden z-10">
+        <div className="container relative px-4 mx-auto">
+          <div className="flex flex-col md:flex-row gap-6 mt-12">
+            <div className="w-full md:w-1/3 xl:w-1/4">
+              <Sidebar
+                filterFasilitasKamar={fasilitasKamar}
+                filterFasilitasBersama={fasilitasBersama}
+                selectedFilters={selectedFilters}
+                setSelectedFilters={setSelectedFilters}
+              />
+            </div>
+            <div className="w-full md:w-2/3 xl:w-3/4">
+              <div className="grid grid-cols-12 gap-4">
+                {filteredResults.map((product, index) => (
+                  <Product key={index} product={product} />
+                ))}
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
   );
 };
 
