@@ -9,7 +9,7 @@ const Product = ({ product }) => {
     hargaPerBulan,
     fotoKost,
     fasilitasKamar,
-    jumlahKamarTersisa,
+    jumlahKamarTersedia,
     alamat,
     kota,
     provinsi,
@@ -27,15 +27,15 @@ const Product = ({ product }) => {
 
   return (
     <div className="col-span-12 md:col-span-6 lg:col-span-4">
-      <div className="bg-white dark:bg-slate-800 shadow border dark:border-slate-700 rounded-xl p-4 pb-0">
-        <div className="bg-gray-100 dark:bg-slate-700 rounded flex justify-center items-center min-h-[265px] relative p-12 w-full">
+      <div className="bg-white dark:bg-slate-800 shadow border dark:border-slate-700 rounded-xl overflow-hidden">
+        <div className="w-full h-56 overflow-hidden">
           <img
             src={`https://hanabira.co/${fotoKost}`}
             alt={namaKost}
-            className="max-w-full h-auto"
+            className="w-full h-full object-cover"
           />
         </div>
-        <div className="py-6 px-1">
+        <div className="py-4 px-6">
           <div className="flex justify-between items-center">
             <div>
               <Link to={`/page/${product.id}`}>
@@ -57,11 +57,11 @@ const Product = ({ product }) => {
             {alamat}, {kota}, {provinsi}
           </div>
           <div className="mt-2 text-sm text-gray-500">
-            Hanya {jumlahKamarTersisa} kamar tersisa
+            Hanya {jumlahKamarTersedia} kamar tersisa
           </div>
         </div>
-        <div className="p-4 bg-gray-100 text-right">
-          <button className="bg-blue-500 text-white px-4 py-2 rounded">
+        <div className="py-4 px-6 bg-gray-100 text-right">
+          <button className="bg-custom-orange text-white px-4 py-2 rounded">
             Lihat ketersediaan
           </button>
         </div>
@@ -203,7 +203,7 @@ const EPGrid12_Qr7J3PqS = () => {
               />
             </div>
             <div className="w-full md:w-2/3 xl:w-3/4">
-              <div className="grid grid-cols-12 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {filteredResults.map((product, index) => (
                   <Product key={index} product={product} />
                 ))}

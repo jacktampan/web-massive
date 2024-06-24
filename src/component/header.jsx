@@ -19,12 +19,12 @@ const WelcomePage = () => {
               <img
                 src={image1}
                 alt="Image 1"
-                className="w-20 h-20 rounded-lg shadow-lg mb-4 md:mb-0"
+                className="w-60 h-60 rounded-lg shadow-lg mb-4 md:mb-0"
               />
               <img
                 src={image2}
                 alt="Image 2"
-                className="w-20 h-20 rounded-lg shadow-lg"
+                className="w-60 h-60 rounded-lg shadow-lg"
               />
             </div>
           </div>
