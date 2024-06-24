@@ -60,7 +60,7 @@ function SearchForm() {
           }}
         >
           <select
-            className="py-2 px-4 border rounded-full text-gray-700 focus:outline-none focus:shadow-outline"
+            className="py-2 px-4 border text-gray-700 focus:outline-none focus:shadow-outline"
             value={kota}
             onChange={(e) => setKota(e.target.value)}
           >
