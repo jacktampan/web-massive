@@ -51,7 +51,7 @@ function SearchForm() {
 
   return (
     <div className="container mx-auto p-4">
-      <section className="bg-custom-color dark:bg-zinc-800 flex justify-center p-4">
+      <section className="bg-custom-color flex justify-center p-4">
         <form
           className="flex flex-col md:flex-row justify-center items-center gap-4 w-full max-w-5xl"
           onSubmit={(e) => {
@@ -73,7 +73,7 @@ function SearchForm() {
           </select>
 
           <select
-            className="py-2 px-4 border rounded-full text-gray-700 focus:outline-none focus:shadow-outline"
+            className="py-2 px-4 border text-gray-700 focus:outline-none focus:shadow-outline"
             value={kategoriKost}
             onChange={(e) => setKategoriKost(e.target.value)}
           >
@@ -86,7 +86,7 @@ function SearchForm() {
           </select>
 
           <input
-            className="py-2 px-4 border rounded-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="py-2 px-4 border text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="hargaMin"
             type="number"
             placeholder="Harga Min"
@@ -95,7 +95,7 @@ function SearchForm() {
           />
 
           <input
-            className="py-2 px-4 border rounded-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="py-2 px-4 border text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="hargaMax"
             type="number"
             placeholder="Harga Max"
@@ -104,7 +104,7 @@ function SearchForm() {
           />
 
           <button
-            className="bg-custom-orange hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full focus:outline-none focus:shadow-outline"
+            className="bg-custom-orange text-white font-bold py-2 px-4 rounded-full focus:outline-none focus:shadow-outline"
             type="submit"
           >
             Search
