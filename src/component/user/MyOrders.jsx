@@ -9,11 +9,14 @@ const MyOrders = () => {
   const [showReviewForm, setShowReviewForm] = useState(null); // State untuk menampilkan form review
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
+  const [userPoints, setUserPoints] = useState(0); // State untuk menyimpan points user
 
   useEffect(() => {
-    const fetchOrders = async () => {
+    const fetchOrdersAndPoints = async () => {
       try {
         const token = localStorage.getItem("token");
+
+        // Fetch orders
         const ordersResponse = await axios.get(
           "https://hanabira.co/api/orders",
           {
@@ -27,12 +30,23 @@ const MyOrders = () => {
           .filter((order) => order.paymentProof)
           .map((order) => order.id);
         setUploadedOrderIds(uploadedOrders);
+
+        // Fetch user points
+        const pointsResponse = await axios.get(
+          "https://hanabira.co/api/user/points",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        setUserPoints(pointsResponse.data.points);
       } catch (error) {
-        console.error("Error fetching orders:", error);
+        console.error("Error fetching orders or points:", error);
       }
     };
 
-    fetchOrders();
+    fetchOrdersAndPoints();
   }, []);
 
   const handleFileChange = (e) => {
@@ -102,6 +116,10 @@ const MyOrders = () => {
   return (
     <div className="my-orders p-8 bg-white border rounded-lg max-w-2xl mx-auto">
       <h3 className="form-heading text-lg font-semibold mb-4">My Orders</h3>
+      <div className="mb-4">
+        <span className="font-semibold">Points Available:</span> {userPoints}{" "}
+        points
+      </div>
       {orders.length > 0 ? (
         <ul>
           {orders.map((order) => (

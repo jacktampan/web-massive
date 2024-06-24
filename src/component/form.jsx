@@ -16,6 +16,9 @@ export default function Checkout() {
   const [selectedMethod, setSelectedMethod] = useState(null);
   const [selectedBank, setSelectedBank] = useState("BNI");
   const [options, setOptions] = useState([]);
+  const [userPoints, setUserPoints] = useState(0);
+  const [usePoints, setUsePoints] = useState(false);
+  const [discountedPrice, setDiscountedPrice] = useState(0);
 
   useEffect(() => {
     if (product) {
@@ -53,9 +56,39 @@ export default function Checkout() {
         }
       };
 
+      const fetchUserPoints = async () => {
+        try {
+          const token = localStorage.getItem("token");
+          const response = await axios.get(
+            "https://hanabira.co/api/user/points",
+            {
+              headers: { Authorization: `Bearer ${token}` },
+            }
+          );
+          setUserPoints(response.data.points);
+        } catch (error) {
+          console.error("Error fetching user points:", error);
+        }
+      };
+
       fetchOptions();
+      fetchUserPoints();
     }
   }, [product]);
+
+  useEffect(() => {
+    if (selectedMethod) {
+      const selectedOption = options.find(
+        (option) => option.id === selectedMethod
+      );
+      if (usePoints) {
+        const discount = Math.min(userPoints, selectedOption.price);
+        setDiscountedPrice(selectedOption.price - discount);
+      } else {
+        setDiscountedPrice(selectedOption.price);
+      }
+    }
+  }, [selectedMethod, usePoints, options, userPoints]);
 
   const handleConfirmOrder = async (e) => {
     e.preventDefault();
@@ -64,13 +97,14 @@ export default function Checkout() {
     );
 
     try {
-      const token = localStorage.getItem("token"); // Assuming the JWT token is stored in localStorage
+      const token = localStorage.getItem("token");
       const response = await axios.post(
         "https://hanabira.co/api/orders",
         {
           kostId: product.id,
           duration: selectedMethod,
-          totalPrice: selectedOption.price,
+          totalPrice: discountedPrice,
+          usedPoints: usePoints ? userPoints : 0,
         },
         {
           headers: {
@@ -88,6 +122,8 @@ export default function Checkout() {
             bank: selectedBank,
             accountNumber: "1234567890", // Update this with the correct account number
           },
+          discountedPrice,
+          usedPoints: usePoints ? userPoints : 0,
         },
       });
     } catch (error) {
@@ -232,6 +268,29 @@ export default function Checkout() {
                     ))}
                   </div>
                 </RadioGroup>
+
+                <div className="mt-6 flex items-center">
+                  <input
+                    id="use-points"
+                    name="use-points"
+                    type="checkbox"
+                    checked={usePoints}
+                    onChange={(e) => setUsePoints(e.target.checked)}
+                    className="h-4 w-4 text-custom-orange border-gray-300 rounded"
+                  />
+                  <label
+                    htmlFor="use-points"
+                    className="ml-2 block text-sm text-gray-900"
+                  >
+                    Gunakan {userPoints} points untuk diskon
+                  </label>
+                </div>
+
+                <div className="mt-6">
+                  <h3 className="text-lg leading-6 font-medium text-gray-900">
+                    Total Harga: Rp {discountedPrice.toLocaleString()}
+                  </h3>
+                </div>
 
                 <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
                   <button
