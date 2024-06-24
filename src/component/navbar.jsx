@@ -117,7 +117,7 @@ const NavBar = () => {
     <nav className="bg-white container mx-auto">
       <div className="flex justify-between items-center py-5 px-2">
         <a href="/">
-          <img src={Logoimg} alt="Logo" className="h-12" />
+          <img src={Logoimg} alt="Logo" className="h-32" />
         </a>
         <div className="hidden md:flex items-center space-x-4">
           {links.map((link) => (
