@@ -6,6 +6,8 @@ export default function OrderSummary() {
   const product = location.state?.product;
   const selectedOption = location.state?.selectedOption;
   const paymentInfo = location.state?.paymentInfo;
+  const discountedPrice = location.state?.discountedPrice;
+  const usedPoints = location.state?.usedPoints;
 
   if (!product || !selectedOption || !paymentInfo) {
     return <div>Loading...</div>;
@@ -93,9 +95,26 @@ export default function OrderSummary() {
             <h3 className="sr-only">Ringkasan</h3>
             <dl className="space-y-6 border-t border-gray-200 pt-10 text-sm">
               <div className="flex justify-between">
-                <dt className="font-medium text-custom-orange">Total</dt>
-                <dd className="text-custom-orange">{`Rp ${selectedOption.price.toLocaleString()}`}</dd>
+                <dt className="font-medium text-custom-orange">Total Harga</dt>
+                <dd className="text-custom-orange">
+                  {usedPoints > 0 ? (
+                    <>
+                      <div className="line-through">{`Rp ${selectedOption.price.toLocaleString()}`}</div>
+                      <div>{`Rp ${discountedPrice.toLocaleString()}`}</div>
+                    </>
+                  ) : (
+                    `Rp ${selectedOption.price.toLocaleString()}`
+                  )}
+                </dd>
               </div>
+              {usedPoints > 0 && (
+                <div className="flex justify-between">
+                  <dt className="font-medium text-custom-orange">
+                    Points Digunakan
+                  </dt>
+                  <dd className="text-custom-orange">{usedPoints}</dd>
+                </div>
+              )}
             </dl>
           </div>
         </div>
