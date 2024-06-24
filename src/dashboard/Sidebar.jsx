@@ -43,8 +43,8 @@ export default function Sidebar() {
                     className={({ isActive }) =>
                       classNames(
                         isActive
-                          ? "bg-gray-50 text-indigo-600"
-                          : "text-gray-700 hover:text-indigo-600 hover:bg-gray-50",
+                          ? "bg-orange-50 text-custom-orange"
+                          : "text-gray-700 hover:text-custom-orange hover:bg-orange-50",
                         "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
                       )
                     }
@@ -57,8 +57,8 @@ export default function Sidebar() {
                     <item.icon
                       className={classNames(
                         item.href === window.location.pathname
-                          ? "text-indigo-600"
-                          : "text-gray-400 group-hover:text-indigo-600",
+                          ? "text-custom-orange"
+                          : "text-gray-400 group-hover:text-custom-orange",
                         "h-6 w-6 shrink-0"
                       )}
                       aria-hidden="true"
@@ -72,10 +72,10 @@ export default function Sidebar() {
           <li className="mt-auto">
             <button
               onClick={handleLogout}
-              className="group flex w-full gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-700 hover:bg-gray-50 hover:text-indigo-600"
+              className="group flex w-full gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-700 hover:bg-orange-50 hover:text-custom-orange"
             >
               <svg
-                className="h-6 w-6 shrink-0 text-gray-400 group-hover:text-indigo-600"
+                className="h-6 w-6 shrink-0 text-gray-400 group-hover:text-custom-orange"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
