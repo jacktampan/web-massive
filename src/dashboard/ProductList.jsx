@@ -44,7 +44,11 @@ const ProductList = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`https://hanabira.co/api/products/${id}`);
+      await axios.delete(`https://hanabira.co/api/products/${id}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
       fetchProducts();
     } catch (error) {
       console.error("There was an error deleting the product!", error);
@@ -57,7 +61,12 @@ const ProductList = () => {
     try {
       await axios.put(
         `https://hanabira.co/api/products/${editingProduct.id}`,
-        editingProduct
+        editingProduct,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
       );
       setEditingProduct(null);
       setOpen(false);
