@@ -60,7 +60,7 @@ function SearchForm() {
           }}
         >
           <select
-            className="py-2 px-4 border text-gray-700 focus:outline-none focus:shadow-outline"
+            className="py-2 px-4 border text-gray-700 focus:outline-none focus:shadow-outline w-full"
             value={kota}
             onChange={(e) => setKota(e.target.value)}
           >
@@ -73,7 +73,7 @@ function SearchForm() {
           </select>
 
           <select
-            className="py-2 px-4 border text-gray-700 focus:outline-none focus:shadow-outline"
+            className="py-2 px-4 border text-gray-700 focus:outline-none focus:shadow-outline w-full"
             value={kategoriKost}
             onChange={(e) => setKategoriKost(e.target.value)}
           >
@@ -86,7 +86,7 @@ function SearchForm() {
           </select>
 
           <input
-            className="py-2 px-4 border text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="py-2 px-4 border text-gray-700 leading-tight focus:outline-none focus:shadow-outline w-full"
             id="hargaMin"
             type="number"
             placeholder="Harga Min"
@@ -95,7 +95,7 @@ function SearchForm() {
           />
 
           <input
-            className="py-2 px-4 border text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="py-2 px-4 border text-gray-700 leading-tight focus:outline-none focus:shadow-outline w-full"
             id="hargaMax"
             type="number"
             placeholder="Harga Max"

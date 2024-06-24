@@ -8,9 +8,6 @@ export default function PagePage() {
     <>
       <NavBar />
       <Page />
-      <div className="container mx-auto p-14">
-        <Review />
-      </div>
       <Footer />
     </>
   );

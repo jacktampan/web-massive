@@ -79,7 +79,7 @@ const Page = () => {
           <p className="mb-4">You need to login to rent this product.</p>
           <button
             onClick={() => navigate("/login")}
-            className="w-full bg-indigo-600 text-white py-2 rounded hover:bg-indigo-700 transition duration-200"
+            className="w-full bg-custom-orange text-white py-2 rounded transition duration-200"
           >
             Login
           </button>
