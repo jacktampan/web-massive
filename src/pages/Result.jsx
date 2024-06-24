@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import PropTypes from "prop-types";
-import { StarIcon, HeartIcon } from "@heroicons/react/20/solid";
 
 const Product = ({ product }) => {
   const {
     namaKost,
     hargaPerBulan,
-    hargaPer12Bulan,
     fotoKost,
     fasilitasKamar,
     jumlahKamarTersisa,
@@ -15,17 +13,21 @@ const Product = ({ product }) => {
     kota,
     provinsi,
   } = product;
-  const hargaDiskon = hargaPer12Bulan / 12;
-  const isDiskonLebihMurah = hargaDiskon < hargaPerBulan;
+
+  // Mengambil 3 fasilitas kamar pertama untuk ditampilkan
   const fasilitas = JSON.parse(fasilitasKamar).slice(0, 3);
+
+  // Fungsi untuk memformat harga ke dalam format keuangan dengan titik sebagai pemisah ribuan
+  const formatRupiah = (number) => {
+    return number
+      .toLocaleString("id-ID", { style: "currency", currency: "IDR" })
+      .replace(",00", "");
+  };
 
   return (
     <div className="col-span-12 md:col-span-6 lg:col-span-4">
       <div className="bg-white dark:bg-slate-800 shadow border dark:border-slate-700 rounded-xl p-4 pb-0">
         <div className="bg-gray-100 dark:bg-slate-700 rounded flex justify-center items-center min-h-[265px] relative p-12 w-full">
-          <div className="absolute top-2.5 right-2.5 w-10 h-10 bg-white dark:bg-slate-800 rounded-full text-base flex justify-center items-center cursor-pointer">
-            <HeartIcon className="w-5 h-5 text-red-500" />
-          </div>
           <img
             src={`https://hanabira.co/${fotoKost}`}
             alt={namaKost}
@@ -40,18 +42,11 @@ const Product = ({ product }) => {
                   {namaKost}
                 </h6>
               </Link>
-              <span className="text-sm text-yellow-500 flex">
-                {Array.from({ length: 4 }, (_, index) => (
-                  <StarIcon key={index} className="w-4 h-4 mr-1" />
-                ))}
-                <StarIcon className="w-4 h-4 mr-1" />
-              </span>
             </div>
             <div>
-              <p className="text-3xl font-bold">Rp {hargaPerBulan}</p>
-              {isDiskonLebihMurah && (
-                <p className="text-red-500 line-through">Rp {hargaDiskon}</p>
-              )}
+              <p className="text-3xl font-bold">
+                {formatRupiah(hargaPerBulan)}
+              </p>
             </div>
           </div>
           <div className="mt-2 text-sm text-gray-500">
@@ -191,15 +186,6 @@ const EPGrid12_Qr7J3PqS = () => {
         fasilitasBersamaArray.includes(filter)
     );
   });
-
-  // Log untuk memastikan data diterima dengan benar
-  console.log("Results:", results);
-  console.log("Filter Fasilitas Kamar:", filterFasilitasKamar);
-  console.log("Filter Fasilitas Bersama:", filterFasilitasBersama);
-  console.log("All Fasilitas Kamar:", fasilitasKamar);
-  console.log("All Fasilitas Bersama:", fasilitasBersama);
-  console.log("Selected Filters:", selectedFilters);
-  console.log("Filtered Results:", filteredResults);
 
   return (
     <section className="py-14 md:py-24 bg-white dark:bg-[#0b1727] text-zinc-900 dark:text-white relative overflow-hidden z-10">
