@@ -109,7 +109,7 @@ const EditProfile = () => {
           <div className="buttons flex justify-between">
             <button
               type="submit"
-              className="save-button bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600"
+              className="save-button bg-custom-orange text-white py-2 px-4 rounded-lg"
             >
               Save
             </button>
