@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import PropTypes from "prop-types";
 import { StarIcon, HeartIcon } from "@heroicons/react/20/solid";
@@ -123,12 +123,38 @@ Sidebar.propTypes = {
 
 const EPGrid12_Qr7J3PqS = () => {
   const location = useLocation();
-  const { results, filterFasilitasKamar, filterFasilitasBersama } =
-    location.state || {
-      results: [],
-      filterFasilitasKamar: [],
-      filterFasilitasBersama: [],
-    };
+  const [fasilitasKamar, setFasilitasKamar] = useState([]);
+  const [fasilitasBersama, setFasilitasBersama] = useState([]);
+
+  const {
+    results = [],
+    filterFasilitasKamar = [],
+    filterFasilitasBersama = [],
+  } = location.state || {};
+
+  useEffect(() => {
+    if (results.length > 0) {
+      // Mengumpulkan semua fasilitas kamar dan bersama dari results
+      const allFasilitasKamar = [];
+      const allFasilitasBersama = [];
+
+      results.forEach((result) => {
+        allFasilitasKamar.push(...JSON.parse(result.fasilitasKamar));
+        allFasilitasBersama.push(...JSON.parse(result.fasilitasBersama));
+      });
+
+      // Menghapus duplikat
+      setFasilitasKamar([...new Set(allFasilitasKamar)]);
+      setFasilitasBersama([...new Set(allFasilitasBersama)]);
+    }
+  }, [results]);
+
+  // Log untuk memastikan data diterima dengan benar
+  console.log("Results:", results);
+  console.log("Filter Fasilitas Kamar:", filterFasilitasKamar);
+  console.log("Filter Fasilitas Bersama:", filterFasilitasBersama);
+  console.log("All Fasilitas Kamar:", fasilitasKamar);
+  console.log("All Fasilitas Bersama:", fasilitasBersama);
 
   return (
     <section className="py-14 md:py-24 bg-white dark:bg-[#0b1727] text-zinc-900 dark:text-white relative overflow-hidden z-10">
@@ -136,8 +162,8 @@ const EPGrid12_Qr7J3PqS = () => {
         <div className="flex flex-col md:flex-row gap-6 mt-12">
           <div className="w-full md:w-1/3 xl:w-1/4">
             <Sidebar
-              filterFasilitasKamar={filterFasilitasKamar}
-              filterFasilitasBersama={filterFasilitasBersama}
+              filterFasilitasKamar={fasilitasKamar}
+              filterFasilitasBersama={fasilitasBersama}
             />
           </div>
           <div className="w-full md:w-2/3 xl:w-3/4">
