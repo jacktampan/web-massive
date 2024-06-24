@@ -78,7 +78,23 @@ Product.propTypes = {
   product: PropTypes.object.isRequired,
 };
 
-const Sidebar = ({ filterFasilitasKamar, filterFasilitasBersama }) => {
+const Sidebar = ({
+  filterFasilitasKamar,
+  filterFasilitasBersama,
+  selectedFilters,
+  setSelectedFilters,
+}) => {
+  const handleCheckboxChange = (event) => {
+    const { name, checked } = event.target;
+    setSelectedFilters((prevFilters) => {
+      if (checked) {
+        return [...prevFilters, name];
+      } else {
+        return prevFilters.filter((filter) => filter !== name);
+      }
+    });
+  };
+
   return (
     <div className="bg-white dark:bg-slate-800 rounded-xl border dark:border-slate-700 p-4 lg:p-6">
       <form>
@@ -88,7 +104,14 @@ const Sidebar = ({ filterFasilitasKamar, filterFasilitasBersama }) => {
           </h5>
           {filterFasilitasKamar.map((option) => (
             <div className="block mt-4" key={option}>
-              <input className="form-check-input" type="checkbox" id={option} />{" "}
+              <input
+                className="form-check-input"
+                type="checkbox"
+                id={option}
+                name={option}
+                checked={selectedFilters.includes(option)}
+                onChange={handleCheckboxChange}
+              />{" "}
               <label className="form-check-label" htmlFor={option}>
                 {option}
               </label>
@@ -104,7 +127,14 @@ const Sidebar = ({ filterFasilitasKamar, filterFasilitasBersama }) => {
           </h5>
           {filterFasilitasBersama.map((option) => (
             <div className="block mt-4" key={option}>
-              <input className="form-check-input" type="checkbox" id={option} />{" "}
+              <input
+                className="form-check-input"
+                type="checkbox"
+                id={option}
+                name={option}
+                checked={selectedFilters.includes(option)}
+                onChange={handleCheckboxChange}
+              />{" "}
               <label className="form-check-label" htmlFor={option}>
                 {option}
               </label>
@@ -119,12 +149,15 @@ const Sidebar = ({ filterFasilitasKamar, filterFasilitasBersama }) => {
 Sidebar.propTypes = {
   filterFasilitasKamar: PropTypes.arrayOf(PropTypes.string).isRequired,
   filterFasilitasBersama: PropTypes.arrayOf(PropTypes.string).isRequired,
+  selectedFilters: PropTypes.arrayOf(PropTypes.string).isRequired,
+  setSelectedFilters: PropTypes.func.isRequired,
 };
 
 const EPGrid12_Qr7J3PqS = () => {
   const location = useLocation();
   const [fasilitasKamar, setFasilitasKamar] = useState([]);
   const [fasilitasBersama, setFasilitasBersama] = useState([]);
+  const [selectedFilters, setSelectedFilters] = useState([]);
 
   const {
     results = [],
@@ -149,12 +182,24 @@ const EPGrid12_Qr7J3PqS = () => {
     }
   }, [results]);
 
+  const filteredResults = results.filter((result) => {
+    const fasilitasKamarArray = JSON.parse(result.fasilitasKamar);
+    const fasilitasBersamaArray = JSON.parse(result.fasilitasBersama);
+    return selectedFilters.every(
+      (filter) =>
+        fasilitasKamarArray.includes(filter) ||
+        fasilitasBersamaArray.includes(filter)
+    );
+  });
+
   // Log untuk memastikan data diterima dengan benar
   console.log("Results:", results);
   console.log("Filter Fasilitas Kamar:", filterFasilitasKamar);
   console.log("Filter Fasilitas Bersama:", filterFasilitasBersama);
   console.log("All Fasilitas Kamar:", fasilitasKamar);
   console.log("All Fasilitas Bersama:", fasilitasBersama);
+  console.log("Selected Filters:", selectedFilters);
+  console.log("Filtered Results:", filteredResults);
 
   return (
     <section className="py-14 md:py-24 bg-white dark:bg-[#0b1727] text-zinc-900 dark:text-white relative overflow-hidden z-10">
@@ -164,11 +209,13 @@ const EPGrid12_Qr7J3PqS = () => {
             <Sidebar
               filterFasilitasKamar={fasilitasKamar}
               filterFasilitasBersama={fasilitasBersama}
+              selectedFilters={selectedFilters}
+              setSelectedFilters={setSelectedFilters}
             />
           </div>
           <div className="w-full md:w-2/3 xl:w-3/4">
             <div className="grid grid-cols-12 gap-4">
-              {results.map((product, index) => (
+              {filteredResults.map((product, index) => (
                 <Product key={index} product={product} />
               ))}
             </div>
