@@ -110,6 +110,12 @@ const Register = () => {
               Login
             </a>
           </p>
+          <p className="text-gray-600 mt-2">
+            Want to go back?{" "}
+            <a href="/" className="text-custom-orange hover:underline">
+              Home
+            </a>
+          </p>
         </div>
       </div>
     </div>

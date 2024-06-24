@@ -132,11 +132,13 @@ const ProductForm = () => {
 
   return (
     <div className="flex-1 p-6 bg-white">
-      <h1 className="text-2xl font-bold text-custom-orange">Product Form</h1>
+      <h1 className="text-2xl font-bold text-custom-orange">
+        Silahkan Lengkapi Data Kost Anda
+      </h1>
       <div className="mt-4">
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="text-custom-orange">Nama Kost:</label>
+            <label className="text-black">Nama Kost:</label>
             <input
               type="text"
               name="namaKost"
@@ -149,7 +151,7 @@ const ProductForm = () => {
             )}
           </div>
           <div>
-            <label className="text-custom-orange">Ukuran Kost:</label>
+            <label className="text-black">Ukuran Kost:</label>
             <input
               type="text"
               name="ukuranKost"
@@ -162,7 +164,7 @@ const ProductForm = () => {
             )}
           </div>
           <div>
-            <label className="text-custom-orange">Jumlah Total Kamar:</label>
+            <label className="text-black">Jumlah Total Kamar:</label>
             <input
               type="number"
               name="jumlahTotalKamar"
@@ -175,7 +177,7 @@ const ProductForm = () => {
             )}
           </div>
           <div>
-            <label className="text-custom-orange">Jumlah Kamar Tersedia:</label>
+            <label className="text-black">Jumlah Kamar Tersedia:</label>
             <input
               type="number"
               name="jumlahKamarTersedia"
@@ -188,7 +190,7 @@ const ProductForm = () => {
             )}
           </div>
           <div>
-            <label className="text-custom-orange">Harga Per Bulan:</label>
+            <label className="text-black">Harga Per Bulan:</label>
             <input
               type="number"
               name="hargaPerBulan"
@@ -201,7 +203,7 @@ const ProductForm = () => {
             )}
           </div>
           <div>
-            <label className="text-custom-orange">Harga Per 3 Bulan:</label>
+            <label className="text-black">Harga Per 3 Bulan:</label>
             <input
               type="number"
               name="hargaPer3Bulan"
@@ -214,7 +216,7 @@ const ProductForm = () => {
             )}
           </div>
           <div>
-            <label className="text-custom-orange">Harga Per 6 Bulan:</label>
+            <label className="text-black">Harga Per 6 Bulan:</label>
             <input
               type="number"
               name="hargaPer6Bulan"
@@ -227,7 +229,7 @@ const ProductForm = () => {
             )}
           </div>
           <div>
-            <label className="text-custom-orange">Harga Per 12 Bulan:</label>
+            <label className="text-black">Harga Per 12 Bulan:</label>
             <input
               type="number"
               name="hargaPer12Bulan"
@@ -240,7 +242,7 @@ const ProductForm = () => {
             )}
           </div>
           <div>
-            <label className="text-custom-orange">Alamat:</label>
+            <label className="text-black">Alamat:</label>
             <input
               type="text"
               name="alamat"
@@ -251,7 +253,7 @@ const ProductForm = () => {
             {errors.alamat && <p className="text-red-500">{errors.alamat}</p>}
           </div>
           <div>
-            <label className="text-custom-orange">Kota:</label>
+            <label className="text-black">Kota:</label>
             <input
               type="text"
               name="kota"
@@ -262,7 +264,7 @@ const ProductForm = () => {
             {errors.kota && <p className="text-red-500">{errors.kota}</p>}
           </div>
           <div>
-            <label className="text-custom-orange">Provinsi:</label>
+            <label className="text-black">Provinsi:</label>
             <input
               type="text"
               name="provinsi"
@@ -350,18 +352,38 @@ const ProductForm = () => {
           <CheckboxGroup
             title="Peraturan Kost"
             options={[
-              "Tidak boleh bawa hewan peliharaan",
-              "Tidak boleh merokok di kamar",
-              "Dilarang menerima tamu menginap",
-              "Tamu hanya boleh berkunjung pada jam tertentu",
-              "Denda kerusakan barang kost",
-              "Wajib sertakan KTP saat pengajuan sewa",
+              "Tamu tidak diperbolehkan diterima",
+              "Tamu tidak diperbolehkan menginap",
+              "Ada jam malam",
+              "Lawan jenis dilarang masuk kamar",
+              "Tamu menginap dikenakan biaya tambahan",
+              "Ada jam malam khusus tamu",
+              "Dilarang merokok di dalam kamar",
+              "Tidak untuk pasangan suami istri",
+              "Akses 24 jam",
+              "Kamar hanya untuk penyewa",
+              "Tidak diperbolehkan membawa anak",
+              "Diperbolehkan membawa anak",
+              "Khusus mahasiswa",
+              "Harga belum termasuk listrik",
+              "Diperbolehkan membawa hewan peliharaan",
+              "Khusus karyawan",
+              "Termasuk listrik",
+              "Diperbolehkan untuk pasangan suami istri",
+              "Kriteria umum",
+              "Wajib menyertakan KTP saat pengajuan sewa",
+              "Denda kerusakan barang kos",
+              "Tamu bebas berkunjung",
+              "Wajib menyertakan buku nikah saat pengajuan sewa",
+              "Dilarang membawa hewan peliharaan",
+              "Tamu diperbolehkan menginap",
+              "Wajib menyertakan kartu keluarga saat pengajuan sewa",
             ]}
             selectedOptions={formData.peraturan}
             handleChange={(option) => handleCheckboxChange("peraturan", option)}
           />
           <div>
-            <label className="text-custom-orange">Kategori Kost:</label>
+            <label className="text-black">Kategori Kost:</label>
             <div className="flex space-x-4">
               <label>
                 <input
@@ -402,7 +424,7 @@ const ProductForm = () => {
             )}
           </div>
           <div>
-            <label className="text-custom-orange">Foto Kost:</label>
+            <label className="text-black">Foto Kost:</label>
             <input
               type="file"
               name="fotoKost"
@@ -411,7 +433,7 @@ const ProductForm = () => {
             />
           </div>
           <div>
-            <label className="text-custom-orange">Foto Luar Kamar:</label>
+            <label className="text-black">Foto Luar Kamar:</label>
             <input
               type="file"
               name="fotoLuarKamar"
@@ -420,7 +442,7 @@ const ProductForm = () => {
             />
           </div>
           <div>
-            <label className="text-custom-orange">Foto Dalam Kamar:</label>
+            <label className="text-black">Foto Dalam Kamar:</label>
             <input
               type="file"
               name="fotoDalamKamar"
@@ -463,8 +485,8 @@ const ProductForm = () => {
                     />
                   </div>
                   <div className="ml-3 w-0 flex-1 pt-0.5">
-                    <p className="text-sm font-medium text-gray-900">
-                      Successfully submit!
+                    <p className="text-sm font-medium text-custom-orange">
+                      Berhasil Menambahkan Kost!
                     </p>
                     <p className="mt-1 text-sm text-gray-500">
                       Silakan ke menu list untuk melihat daftar kost.

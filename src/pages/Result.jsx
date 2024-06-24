@@ -5,6 +5,7 @@ import Navbar from "../component/navbar";
 
 const Product = ({ product }) => {
   const {
+    id,
     namaKost,
     hargaPerBulan,
     fotoKost,
@@ -26,46 +27,46 @@ const Product = ({ product }) => {
   };
 
   return (
-    <div className="col-span-12 md:col-span-6 lg:col-span-4">
-      <div className="bg-white dark:bg-slate-800 shadow border dark:border-slate-700 rounded-xl overflow-hidden">
-        <div className="w-full h-56 overflow-hidden">
-          <img
-            src={`https://hanabira.co/${fotoKost}`}
-            alt={namaKost}
-            className="w-full h-full object-cover"
-          />
-        </div>
-        <div className="py-4 px-6">
-          <div className="flex justify-between items-center">
-            <div>
-              <Link to={`/page/${product.id}`}>
+    <div className="col-span-12 sm:col-span-6 lg:col-span-1">
+      <Link to={`/page/${id}`}>
+        <div className="bg-white dark:bg-slate-800 shadow border dark:border-slate-700 rounded-xl overflow-hidden">
+          <div className="w-full h-56 overflow-hidden">
+            <img
+              src={`https://hanabira.co/${fotoKost}`}
+              alt={namaKost}
+              className="w-full h-full object-cover"
+            />
+          </div>
+          <div className="py-4 px-6">
+            <div className="flex justify-between items-center">
+              <div>
                 <h6 className="hover:text-blue-600 text-[17px] font-medium mb-1">
                   {namaKost}
                 </h6>
-              </Link>
+              </div>
+              <div>
+                <p className="text-3xl font-bold">
+                  {formatRupiah(hargaPerBulan)}
+                </p>
+              </div>
             </div>
-            <div>
-              <p className="text-3xl font-bold">
-                {formatRupiah(hargaPerBulan)}
-              </p>
+            <div className="mt-2 text-sm text-gray-500">
+              Fasilitas: {fasilitas.join(", ")}
+            </div>
+            <div className="mt-2 text-sm text-gray-500">
+              {alamat}, {kota}, {provinsi}
+            </div>
+            <div className="mt-2 text-sm text-gray-500">
+              Hanya {jumlahKamarTersedia} kamar tersisa
             </div>
           </div>
-          <div className="mt-2 text-sm text-gray-500">
-            Fasilitas: {fasilitas.join(", ")}
-          </div>
-          <div className="mt-2 text-sm text-gray-500">
-            {alamat}, {kota}, {provinsi}
-          </div>
-          <div className="mt-2 text-sm text-gray-500">
-            Hanya {jumlahKamarTersedia} kamar tersisa
+          <div className="py-4 px-6 bg-gray-100 text-right">
+            <button className="bg-custom-orange text-white px-4 py-2 rounded">
+              Lihat ketersediaan
+            </button>
           </div>
         </div>
-        <div className="py-4 px-6 bg-gray-100 text-right">
-          <button className="bg-custom-orange text-white px-4 py-2 rounded">
-            Lihat ketersediaan
-          </button>
-        </div>
-      </div>
+      </Link>
     </div>
   );
 };
@@ -203,7 +204,7 @@ const EPGrid12_Qr7J3PqS = () => {
               />
             </div>
             <div className="w-full md:w-2/3 xl:w-3/4">
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4">
                 {filteredResults.map((product, index) => (
                   <Product key={index} product={product} />
                 ))}
