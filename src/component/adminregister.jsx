@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import logo from "../assets/logo.png";
 
 const AdminRegister = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     username: "",
     email: "",
@@ -24,6 +26,7 @@ const AdminRegister = () => {
         formData
       );
       alert("Admin registered successfully");
+      navigate("/admin/login"); // Redirect to admin login page
     } catch (error) {
       console.error("There was an error registering the admin!", error);
       alert("Failed to register admin");
