@@ -22,7 +22,7 @@ const AdminRegister = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "https://hanabira.co/api/auth/register/admin",
+        "https://backend.sikomik.com/api/auth/register/admin",
         formData
       );
       alert("Admin registered successfully");

@@ -8,7 +8,7 @@ function MainComponent() {
     const fetchOrders = async () => {
       try {
         const token = localStorage.getItem("token");
-        const response = await axios.get("https://hanabira.co/api/orders", {
+        const response = await axios.get("https://backend.sikomik.com/api/orders", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -27,7 +27,7 @@ function MainComponent() {
     try {
       const token = localStorage.getItem("token");
       await axios.put(
-        `https://hanabira.co/api/orders/${orderId}`,
+        `https://backend.sikomik.com/api/orders/${orderId}`,
         { status: "confirmed" },
         {
           headers: {
@@ -79,7 +79,7 @@ function MainComponent() {
                   <td className="p-4">
                     {order.paymentProof ? (
                       <img
-                        src={`https://hanabira.co/${order.paymentProof}`}
+                        src={`https://backend.sikomik.com/${order.paymentProof}`}
                         alt="Payment Proof"
                         className="w-32 h-32 object-cover"
                       />

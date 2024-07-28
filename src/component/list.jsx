@@ -5,7 +5,7 @@ export default function List() {
   const [productsKost, setProductsKost] = useState([]);
 
   useEffect(() => {
-    fetch("https://hanabira.co/api/products")
+    fetch("https://backend.sikomik.com/api/products")
       .then((response) => response.json())
       .then((data) => {
         const formattedData = data.map((product) => ({
@@ -14,7 +14,7 @@ export default function List() {
           href: `/page/${product.id}`, // Update href to navigate to the Page component with the product ID
           price: `Rp ${product.hargaPerBulan}`,
           availability: `${product.alamat}, ${product.kota}, ${product.provinsi}`,
-          imageSrc: `https://hanabira.co/${product.fotoKost}`,
+          imageSrc: `https://backend.sikomik.com/${product.fotoKost}`,
           imageAlt: product.namaKost,
         }));
         setProductsKost(formattedData);

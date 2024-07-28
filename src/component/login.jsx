@@ -9,7 +9,7 @@ function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("https://hanabira.co/api/auth/login", {
+      const response = await axios.post("https://backend.sikomik.com/api/auth/login", {
         username,
         password,
         role: "user",

@@ -14,7 +14,7 @@ const MyOrders = () => {
 
         // Fetch orders
         const ordersResponse = await axios.get(
-          "https://hanabira.co/api/orders",
+          "https://backend.sikomik.com/api/orders",
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -29,7 +29,7 @@ const MyOrders = () => {
 
         // Fetch user points
         const pointsResponse = await axios.get(
-          "https://hanabira.co/api/user/points",
+          "https://backend.sikomik.com/api/user/points",
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -61,7 +61,7 @@ const MyOrders = () => {
     try {
       const token = localStorage.getItem("token");
       await axios.post(
-        `https://hanabira.co/api/orders/${orderId}/upload-proof`,
+        `https://backend.sikomik.com/api/orders/${orderId}/upload-proof`,
         formData,
         {
           headers: {

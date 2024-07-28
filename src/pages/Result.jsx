@@ -32,7 +32,7 @@ const Product = ({ product }) => {
         <div className="bg-white dark:bg-slate-800 shadow border dark:border-slate-700 rounded-xl overflow-hidden">
           <div className="w-full h-56 overflow-hidden">
             <img
-              src={`https://hanabira.co/${fotoKost}`}
+              src={`https://backend.sikomik.com/${fotoKost}`}
               alt={namaKost}
               className="w-full h-full object-cover"
             />

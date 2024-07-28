@@ -13,7 +13,7 @@ const EditProfile = () => {
       try {
         const token = localStorage.getItem("token");
         const profileResponse = await axios.get(
-          "https://hanabira.co/api/users/profile",
+          "https://backend.sikomik.com/api/users/profile",
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -45,7 +45,7 @@ const EditProfile = () => {
     e.preventDefault();
     try {
       const token = localStorage.getItem("token");
-      await axios.put("https://hanabira.co/api/users/profile", formData, {
+      await axios.put("https://backend.sikomik.com/api/users/profile", formData, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,

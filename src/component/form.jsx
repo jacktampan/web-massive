@@ -25,7 +25,7 @@ export default function Checkout() {
       const fetchOptions = async () => {
         try {
           const response = await axios.get(
-            `https://hanabira.co/api/products/${product.id}`
+            `https://backend.sikomik.com/api/products/${product.id}`
           );
           const data = response.data;
           setOptions([
@@ -60,7 +60,7 @@ export default function Checkout() {
         try {
           const token = localStorage.getItem("token");
           const response = await axios.get(
-            "https://hanabira.co/api/user/points",
+            "https://backend.sikomik.com/api/user/points",
             {
               headers: { Authorization: `Bearer ${token}` },
             }
@@ -99,7 +99,7 @@ export default function Checkout() {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.post(
-        "https://hanabira.co/api/orders",
+        "https://backend.sikomik.com/api/orders",
         {
           kostId: product.id,
           duration: selectedMethod,

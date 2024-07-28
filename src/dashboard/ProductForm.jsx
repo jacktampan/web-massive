@@ -91,7 +91,7 @@ const ProductForm = () => {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.post(
-        "https://hanabira.co/api/products",
+        "https://backend.sikomik.com/api/products",
         data,
         {
           headers: {

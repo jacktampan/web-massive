@@ -23,7 +23,7 @@ const Register = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "https://hanabira.co/api/auth/register/user",
+        "https://backend.sikomik.com/api/auth/register/user",
         formData
       );
       alert("User registered successfully");

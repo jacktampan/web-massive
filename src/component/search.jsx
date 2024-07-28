@@ -17,7 +17,7 @@ function SearchForm() {
   useEffect(() => {
     const fetchSuggestions = async () => {
       try {
-        const response = await axios.get("https://hanabira.co/api/suggestions");
+        const response = await axios.get("https://backend.sikomik.com/api/suggestions");
         setSuggestions(response.data);
       } catch (error) {
         console.error("Error fetching suggestions:", error);
@@ -29,7 +29,7 @@ function SearchForm() {
 
   const handleSearch = async () => {
     try {
-      const response = await axios.get("https://hanabira.co/api/search", {
+      const response = await axios.get("https://backend.sikomik.com/api/search", {
         params: {
           kota,
           kategoriKost,

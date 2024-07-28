@@ -22,7 +22,7 @@ const ProductList = () => {
   const fetchProducts = async () => {
     setLoading(true);
     try {
-      const response = await axios.get("https://hanabira.co/api/products");
+      const response = await axios.get("https://backend.sikomik.com/api/products");
       const parsedProducts = response.data.map((product) => ({
         ...product,
         fasilitasKamar: Array.isArray(product.fasilitasKamar)
@@ -50,7 +50,7 @@ const ProductList = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`https://hanabira.co/api/products/${id}`, {
+      await axios.delete(`https://backend.sikomik.com/api/products/${id}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
@@ -91,7 +91,7 @@ const ProductList = () => {
     setLoading(true);
     try {
       await axios.put(
-        `https://hanabira.co/api/products/${editingProduct.id}`,
+        `https://backend.sikomik.com/api/products/${editingProduct.id}`,
         updatedProduct,
         {
           headers: {
