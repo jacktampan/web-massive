@@ -1,4 +1,3 @@
-// ProductPage.jsx
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -20,6 +19,7 @@ const Page = () => {
           `https://backend.sikomik.com/api/products/${id}`
         );
         const product = response.data;
+
         setProduct({
           id: product.id,
           name: product.namaKost,
@@ -50,9 +50,9 @@ const Page = () => {
           hargaPer3Bulan: product.hargaPer3Bulan,
           hargaPer6Bulan: product.hargaPer6Bulan,
           hargaPer12Bulan: product.hargaPer12Bulan,
-          fasilitasKamar: JSON.parse(product.fasilitasKamar),
-          fasilitasBersama: JSON.parse(product.fasilitasBersama),
-          peraturan: JSON.parse(product.peraturan),
+          fasilitasKamar: product.fasilitasKamar,
+          fasilitasBersama: product.fasilitasBersama,
+          peraturan: product.peraturan,
         });
       } catch (error) {
         console.error("Error fetching product:", error);
